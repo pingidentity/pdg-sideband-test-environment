@@ -1,0 +1,132 @@
+# This file provides the initial PingDataGovernance Server configuration for
+# the PingDataGovernance sideband test environment. You can use customize 
+# this configuration for use in your own test environments, but please be 
+# aware that this configuration is intended for demo and documentation 
+# purposes only. Some settings, including HTTPS connection security settings,
+# are insecure and are inappropriate for use in production or other public
+# environments.
+
+# Sideband API Shared Secrets are used to authorize adapters making HTTP
+# requests to the Sideband request/response endpoints. There can be more than
+# one enabled at a time, in order to give adapters a grace period while secrets
+# are rotated in/out.
+dsconfig create-sideband-api-shared-secret \
+    --secret-name sideband-secret-1  \
+    --set shared-secret:AADIIy2j5ChKO5ahrgi5gKc/GpcGhe5ZKQdMCrjPGmmdhzj1dSr7NkpLpjOlXqlDzws=
+
+dsconfig create-sideband-api-shared-secret \
+    --secret-name sideband-secret-2  \
+    --set "shared-secret:AAB58gQBj6p16hVIbBbsjN34SS8IoNCqj9NtzPDw4T21d9azCPP229iHqhuz6kk+ofM="
+
+dsconfig create-sideband-api-shared-secret \
+    --secret-name sideband-secret-3  \
+    --set shared-secret:AAAPAoZA5Gf9BorvZ4e6BcfeEKUmtvI2EDkn1QLnxqWttTH6PbDCUPg0gyKgH2YvMlg=
+
+# The Sideband API is implemented as an HTTP Servlet Extension. The Sideband test
+# environment configures the extension with a request limit of 1MB, a
+# configurable Request-Context-Method, and a single enabled shared secret, in
+# order for adapter developers to ensure the validity of their request/response
+# processing.
+dsconfig set-http-servlet-extension-prop \
+    --extension-name "Sideband API"  \
+    --set "request-limit:1 mb"  \
+    --set request-context-method:${PDG_SIDEBAND_REQUEST_CONTEXT_METHOD}  \
+    --set shared-secrets:sideband-secret-1
+
+# Trust Manager Providers are used by various configuration objects to
+# represent TLS connection security settings. Where the 'Blind Trust' Trust
+# Manager Provider is used, the server will accept any TLS certificate,
+# including self-signed certificates.
+dsconfig set-trust-manager-provider-prop \
+    --provider-name 'Blind Trust'  \
+    --set enabled:true 
+
+# Access Token Validators are used by various HTTP services to parse and accept
+# bearer tokens included in HTTP requests. This defines a Mock Access Token
+# Validator, which accepts 'mock' access tokens for test use. Please refer
+# to the PingDataGovernance Server Administration Guide for more information
+# about mock access tokens and how to use them.
+dsconfig create-access-token-validator \
+    --validator-name 'Mock Access Token Validator'  \
+    --type mock  \
+    --set enabled:true 
+
+# A Token Resource Lookup Method correlates the access token subject to an
+# identity. This Token Resource Lookup Method expects the value of an access
+# token's 'sub' claim to exist in the users.json file.
+dsconfig create-token-resource-lookup-method \
+    --validator-name 'Mock Access Token Validator'  \
+    --method-name 'Example Token Resource Lookup Method'  \
+    --type third-party  \
+    --set evaluation-order-index:1  \
+    --set extension-class:com.unboundid.directory.sdk.examples.ExampleTokenResourceLookupMethod \
+    --set extension-argument:users-file=users.json
+
+# Associate the Mock Access Token Validator with the main Sideband API
+# endpoint.
+dsconfig set-sideband-api-endpoint-prop \
+    --endpoint-name Default  \
+    --set "access-token-validator:Mock Access Token Validator"
+
+# Create Sideband API endpoints for the backend REST application.
+dsconfig create-sideband-api-endpoint \
+    --endpoint-name "Home Instance"  \
+    --set "access-token-validator:Mock Access Token Validator"  \
+    --set "base-path:/homes/{homeId}"
+
+dsconfig create-sideband-api-endpoint \
+    --endpoint-name "Home Members"  \
+    --set "access-token-validator:Mock Access Token Validator"  \
+    --set "base-path:/homes/{homeId}/members"
+
+dsconfig create-sideband-api-endpoint \
+    --endpoint-name "Home Member Instance"  \
+    --set "access-token-validator:Mock Access Token Validator"  \
+    --set "base-path:/homes/{homeId}/members/{memberId}"
+
+dsconfig create-sideband-api-endpoint \
+    --endpoint-name "Home Devices"  \
+    --set "access-token-validator:Mock Access Token Validator"  \
+    --set "base-path:/homes/{homeId}/devices"
+
+dsconfig create-sideband-api-endpoint \
+    --endpoint-name "Home Devices Instance"  \
+    --set "access-token-validator:Mock Access Token Validator"  \
+    --set "base-path:/homes/{homeId}/devices/{deviceId}"
+
+dsconfig create-sideband-api-endpoint \
+    --endpoint-name "Devices Instance"  \
+    --set "access-token-validator:Mock Access Token Validator"  \
+    --set "base-path:/devices/{deviceId}"
+
+dsconfig create-sideband-api-endpoint \
+    --endpoint-name "Person Instance"  \
+    --set "access-token-validator:Mock Access Token Validator"  \
+    --set "base-path:/persons/{personId}"
+
+dsconfig create-sideband-api-endpoint \
+    --endpoint-name "Control Instance"  \
+    --set "access-token-validator:Mock Access Token Validator"  \
+    --set "base-path:/controls/{controlId}"
+
+# The Policy Decision Service controls how PingDataGovernance Server makes
+# policy requests to the policy engine. This configures PingDataGovernance
+# Server to use embedded PDP mode, and preloads it with a Sideband test
+# environment deployment package.
+dsconfig set-policy-decision-service-prop \
+    --set pdp-mode:embedded  \
+    --set "deployment-package<pdg-sideband-test-environment.sdp" \
+    --set trust-framework-version:v2  \
+    --set decision-response-view:decision-tree  \
+    --set decision-response-view:evaluated-entities  \
+    --set decision-response-view:request 
+
+# This enables the debug-trace log, which records detailed information about
+# PingDataGovernance Server's processing stages in response to HTTP requests.
+# This log is used frequently for troubleshooting and is located at the path
+# 'logs/debug-trace' under the server's root directory.
+dsconfig set-log-publisher-prop \
+    --publisher-name 'Debug Trace Logger'  \
+    --set enabled:true  \
+    --remove 'retention-policy:File Count Retention Policy'  \
+    --add 'retention-policy:Retain Two Files Retention Policy' 

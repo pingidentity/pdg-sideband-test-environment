@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Device",
+  "description": "A smart device",
+  "properties": {
+    "id": {
+      "description": "The unique identifier for a device",
+      "faker": "random.uuid"
+    },
+    "name": {
+      "description": "Name of the device",
+      "faker": {
+        "random.words": [ 2 ]
+      }
+    },
+    "type": {
+      "description": "The type of device",
+      "enum": [
+        "switch",
+        "dial",
+        "media_player",
+        "tv",
+        "thermostat",
+        "appliance",
+        "speaker",
+        "detector",
+        "camera",
+        "vehicle",
+        "outlet",
+        "scale"
+      ]
+    },
+    "product": {
+      "description": "The device product",
+      "faker": "commerce.productName"
+    },
+    "vendor": {
+      "description": "The device vendor",
+      "faker": "company.companyName"
+    },
+    "controls": {
+      "description": "The device controls",
+      "items": {
+        "$ref": "Control.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "type",
+    "product",
+    "vendor",
+    "controls"
+  ]
+}

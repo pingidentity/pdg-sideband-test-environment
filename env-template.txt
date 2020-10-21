@@ -1,0 +1,12 @@
+# To override the default server ports, copy this file to .env and edit the variables below.
+PDG_SIDEBAND_DG_PORT=7443
+PDG_SIDEBAND_BACKEND_PORT=8443
+PDG_SIDEBAND_CONSOLE_PORT=5443
+
+PDG_SIDEBAND_REQUEST_CONTEXT_METHOD=state
+
+# You should not need to modify the below variables
+PDG_SIDEBAND_PROFILE_BRANCH=8.1
+PDG_SIDEBAND_DEVOPS_REGISTRY=docker.io/pingidentity
+PDG_SIDEBAND_DEVOPS_TAG=8.1.0.0-alpine-java11-edge
+

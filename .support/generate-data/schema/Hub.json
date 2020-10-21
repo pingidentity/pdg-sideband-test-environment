@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Hub",
+  "description": "A hub",
+  "type": "object",
+  "properties": {
+    "homes": {
+      "description": "All homes associated to this hub",
+      "items": {
+        "$ref": "Home.json"
+      },
+      "minItems": 1
+    },
+    "persons": {
+      "description": "All persons associated to this hub",
+      "faker": {
+        "custom.persons": []
+      }
+    }
+  },
+  "required": [
+    "homes",
+    "persons"
+  ]
+}
