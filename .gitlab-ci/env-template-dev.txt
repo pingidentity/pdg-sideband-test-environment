@@ -1,0 +1,20 @@
+# To override the default server ports, copy this file to .env and edit the variables below.
+PDG_SIDEBAND_CONSOLE_PORT=5443
+PDG_SIDEBAND_BACKEND_PORT=6443
+PDG_SIDEBAND_DG_PORT=7443
+PDG_SIDEBAND_PAP_PORT=5443
+
+PDG_SIDEBAND_REQUEST_CONTEXT_METHOD=state
+
+# See https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token
+# on how to generate a GitHub personal access token.
+PDG_SIDEBAND_GIT_USER=<git_user>
+PDG_SIDEBAND_GIT_TOKEN=<git_token>
+PDG_SIDEBAND_GIT_URL=gitlab.corp.pingidentity.com/PingDirectory/pdg-sideband-test-environment.git
+
+PDG_SIDEBAND_PROFILE_URL=https://${PDG_SIDEBAND_GIT_USER}:${PDG_SIDEBAND_GIT_TOKEN}@${PDG_SIDEBAND_GIT_URL}
+PDG_SIDEBAND_PROFILE_BRANCH=main
+
+PDG_SIDEBAND_DEVOPS_REGISTRY=docker.io/pingidentity
+PDG_SIDEBAND_DEVOPS_TAG=edge
+

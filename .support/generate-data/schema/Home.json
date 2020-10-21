@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Home",
+  "description": "A home",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The unique identifier for a home",
+      "faker": "random.uuid"
+    },
+    "geo": {
+      "description": "The geographic location for a home",
+      "properties": {
+        "lat": {
+          "faker": "address.latitude"
+        },
+        "lng": {
+          "faker": "address.longitude"
+        }
+      },
+      "required": [ "lat", "lng" ]
+    },
+    "name": {
+      "description": "Name of a home",
+      "type": "string",
+      "faker": "company.bsNoun"
+    },
+    "image": {
+      "description": "Image representing a home",
+      "type": "string",
+      "faker": {
+        "image.business": [ 32, 32, true ]
+      }
+    },
+    "devices": {
+      "description": "Devices in a home",
+      "items": {
+        "$ref": "Device.json"
+      },
+      "minItems": 6
+    }
+  },
+  "required": [
+    "id",
+    "geo",
+    "name",
+    "image",
+    "devices"
+  ]
+}

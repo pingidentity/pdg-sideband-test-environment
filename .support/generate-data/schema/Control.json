@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "Control",
+  "description": "A control",
+  "type": "object",
+  "properties": {
+    "id": {
+      "description": "The control unique id",
+      "faker": "random.uuid"
+    },
+    "name": {
+      "description": "The control name",
+      "type": "string",
+      "enum": [ 
+        "power",
+        "volume",
+        "channel",
+        "media_content",
+        "connection_status",
+        "speed",
+        "count",
+        "temperature",
+        "humidity",
+        "brightness",
+        "speed",
+        "roentgen",
+        "carbon_monoxide",
+        "wind_speed",
+        "dew_point",
+        "level",
+        "approval_status"
+      ]
+    },
+    "value": {
+      "description": "The number value of a control",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "status": {
+      "description": "The string status of a control",
+      "type": "string",
+      "enum": [ 
+        "on",
+        "off",
+        "true",
+        "false",
+        "standby",
+        "unknown",
+        "online", 
+        "offline", 
+        "playing", 
+        "paused", 
+        "stopped", 
+        "muted", 
+        "unmuted",
+        "unknown",
+        "recording",
+        "pending",
+        "completed",
+        "processing",
+        "open",
+        "closed",
+        "draft",
+        "approved",
+        "connected",
+        "disconnected",
+        "charging",
+        "discharging"
+     ]
+    },
+    "remaining": {
+      "description": "The number of API calls remaining for the day.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10
+    },
+    "readOnly": {
+      "description": "Indicates if a control is read-only",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "status",
+    "remaining",
+    "readOnly"
+  ]
+}
