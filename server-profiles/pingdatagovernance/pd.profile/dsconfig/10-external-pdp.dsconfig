@@ -17,7 +17,7 @@ dsconfig create-external-server \
     --set key-manager-provider:Null \
     --set 'trust-manager-provider:Blind Trust' \
     --set shared-secret:${PING_IDENTITY_PASSWORD} \
-    --set 'branch:pdg-sideband-test-environment'
+    --set 'branch:smart-hub.snapshot'
 
 # Set the Policy Decision Server to external PDP mode and to use the Policy
 # Administration GUI's policy engine, defined above.

@@ -21,8 +21,8 @@ ports, copy the provided `env-template.txt` file to `.env` for use by `docker-co
 | Environment variable                 | Default port | Description                         |
 | ------------------------------------ | -----------: | ----------------------------------- |
 | PDG\_SIDEBAND\_CONSOLE\_PORT         | 5443         | The PingData Console port.          |
+| PDG\_SIDEBAND\_SMART\_HUB\_PORT      | 6443         | The smart-hub REST API port.        |
 | PDG\_SIDEBAND\_DG\_PORT              | 7443         | The PingDataGovernance Server port. |
-| PDG\_SIDEBAND\_BACKEND\_PORT         | 8443         | The backend REST API port.          |
 
 ## Usage
 
@@ -31,8 +31,8 @@ and uses the responses to indicate to its API gateway whether requests should be
 backend REST API application.
 
 This repository allows sideband developers to deploy both PingDataGovernance and an example backend REST API application
-to different hosts/networks in order to simulate more production-like environments. The following sections describe how
-to run these components.
+(smart-hub-application) to different hosts/networks in order to simulate more production-like environments. The 
+following sections describe how to run these components.
 
 ### PingDataGovernance sideband mode
 
@@ -74,14 +74,14 @@ you made to the PingDataGovernance configuration.
    docker-compose down
    ```
 
-### backend-rest-application
+### smart-hub-application
 
 #### Bringing up the environment
 
 1. Run the following command:
 
    ```bash
-   ./run-backend.sh
+   ./run-smart-hub.sh
    ```
 
 2. Wait for the server to start. This might take some time (up to 5 minutes on some machines) because the script builds the
@@ -95,7 +95,7 @@ you made to the PingDataGovernance configuration.
 3. Verify that the server is running by using an HTTP client like `curl` to access an endpoint.
 
    ```bash
-   curl -H "BERA-USER: d1f988e8-ae56-485e-a905-dfd478252b7b" http://localhost:8443/homes
+   curl -H "SH-USER: d1f988e8-ae56-485e-a905-dfd478252b7b" http://localhost:8443/homes
    ```
 
    You should receive a JSON array of data.

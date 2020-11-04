@@ -69,10 +69,10 @@
         "discharging"
      ]
     },
-    "remaining": {
+    "callsRemaining": {
       "description": "The number of API calls remaining for the day.",
       "type": "integer",
-      "minimum": 1,
+      "minimum": -1,
       "maximum": 10
     },
     "readOnly": {
@@ -84,7 +84,7 @@
     "id",
     "name",
     "status",
-    "remaining",
+    "callsRemaining",
     "readOnly"
   ]
 }
