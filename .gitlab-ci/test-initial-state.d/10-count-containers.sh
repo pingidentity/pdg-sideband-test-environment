@@ -14,7 +14,7 @@ run_test() {
   _sleep_time_secs=60
   _wait_count=5
   _count=0
-  _expected_num_containers=2
+  _expected_num_containers=1
 
   echo "Test that there are $_expected_num_containers containers..."
 

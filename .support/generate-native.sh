@@ -5,9 +5,9 @@ set -e pipefail
 
 echo "Generating data..."
 
-# Run the docker data generation and send the output to two locations
+# Run the data generation and send the output to two locations
 (cd .support/generate-data && npm install >/dev/null 2>&1 && node index.js \
-  | tee ../../backend-rest-application/hub.json \
+  | tee ../../smart-hub-application/hub.json \
   > ../extract-users/hub.json \
   && echo "Successfully generated data.")
 

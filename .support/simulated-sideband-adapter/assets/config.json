@@ -1,0 +1,7 @@
+{
+    "pdgBaseUrl": "https://localhost:7443",
+    "pdgSharedSecretHeaderName": "PDG-TOKEN",
+    "pdgSharedSecretHeaderValue": "5e96eaf6-251e-4555-9434-d1b224f05e99",
+    "backendBaseUrl": "http://localhost:6443",
+    "gatewayPort": 8080
+}
