@@ -18,7 +18,7 @@ default:
   services:
     - name: "docker:18.09-dind"
   tags:
-    - k8s
+    - pdg-sideband-test-environment
 
 variables:
   DOCKER_HOST: "tcp://localhost:2375"

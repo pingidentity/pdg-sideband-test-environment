@@ -20,6 +20,8 @@ sed "s/<git_user>/$GITLAB_USER/;\
   .gitlab-ci/env-template-dev.txt >.env
 fi
 
+docker login --username "${DOCKER_USER}" --password "${DOCKER_PASSWORD}"
+
 docker-compose --verbose up \
   --detach \
   --remove-orphans \

@@ -29,6 +29,51 @@ export class SimulatedSidebandAdapter {
     private server: Express;
 
     /**
+     * Constructor.
+     *
+     * @param cfg The configuration for the adapter.
+     * @param log The logger to use.
+     */
+    constructor(private cfg: SimulatedSidebandAdapterConfig, private log: Console) { }
+
+    /**
+     * Starts the server.
+     */
+    start(): void {
+        this.server = express();
+
+        // Use the JSON body parser
+        this.server.use(express.json());
+
+        // Prevent express from adding its own X-Powered-By header
+        this.server.disable('x-powered-by');
+        this.server.all('*', (request, response) => this.handleRequest(request, response));
+        this.server.listen(this.cfg.gatewayPort, () => this.log.info(`Listening on port ${this.cfg.gatewayPort}...`));
+    }
+
+    /**
+     * Handles a client request.
+     *
+     * @param clientRequest The client request.
+     * @param clientResponse The client response.
+     */
+    private handleRequest(clientRequest: ClientRequest,
+        clientResponse: ClientResponse): void {
+        this.log.info('Handling request...');
+        const inboundSidebandRequest = this.buildInboundSidebandRequest(clientRequest);
+        this.callSidebandApi('request', inboundSidebandRequest)
+            .then(inboundSubResponse => this.processInboundSubResponse(inboundSubResponse, clientResponse))
+            .then(inboundSidebandResponse => this.performBackendSubRequest(inboundSidebandResponse).then(backendSubResponse =>
+                this.processBackendSubResponse(backendSubResponse, inboundSidebandRequest, inboundSidebandResponse, clientResponse)))
+            .then(outboundSidebandRequest => this.callSidebandApi('response', outboundSidebandRequest))
+            .then(outboundSubResponse => this.processOutboundSubResponse(outboundSubResponse, clientResponse))
+            .catch(err => {
+                this.log.error('An unexpected error occurred when handling the request.', err);
+                clientResponse.status(500).send('SIMULATION_HANDLER_ERROR');
+            });
+    }
+
+    /**
      * Forwards an HTTP response from the PingDataGovernance Sideband API to the client.
      *
      * @param sidebandHttpResponse The PingDataGovernance sideband http response.
@@ -213,28 +258,6 @@ export class SimulatedSidebandAdapter {
     }
 
     /**
-     * Handles a client request.
-     *
-     * @param clientRequest The client request.
-     * @param clientResponse The client response.
-     */
-    private handleRequest(clientRequest: ClientRequest,
-        clientResponse: ClientResponse): void {
-        this.log.info('Handling request...');
-        const inboundSidebandRequest = this.buildInboundSidebandRequest(clientRequest);
-        this.callSidebandApi('request', inboundSidebandRequest)
-            .then(inboundSubResponse => this.processInboundSubResponse(inboundSubResponse, clientResponse))
-            .then(inboundSidebandResponse => this.performBackendSubRequest(inboundSidebandResponse).then(backendSubResponse =>
-                this.processBackendSubResponse(backendSubResponse, inboundSidebandRequest, inboundSidebandResponse, clientResponse)))
-            .then(outboundSidebandRequest => this.callSidebandApi('response', outboundSidebandRequest))
-            .then(outboundSubResponse => this.processOutboundSubResponse(outboundSubResponse, clientResponse))
-            .catch(err => {
-                this.log.error('An unexpected error occurred when handling the request.', err);
-                clientResponse.status(500).send('SIMULATION_HANDLER_ERROR');
-            });
-    }
-
-    /**
      * Applies headers received from PingDataGovernance to the client response.
      *
      * @param sidebandHeaders The headers received from the PingDataGovernance Sideband API.
@@ -316,28 +339,5 @@ export class SimulatedSidebandAdapter {
         // TODO: See if there's a way to prevent the need to strip these headers
         return ['content-encoding', 'transfer-encoding'].reduce((acc, ignoreName) =>
             ignoreName === name.toLowerCase() ? true : acc, false);
-    }
-
-    /**
-     * Constructor.
-     *
-     * @param cfg The configuration for the adapter.
-     * @param log The logger to use.
-     */
-    constructor(private cfg: SimulatedSidebandAdapterConfig, private log: Console) { }
-
-    /**
-     * Starts the server.
-     */
-    start(): void {
-        this.server = express();
-
-        // Use the JSON body parser
-        this.server.use(express.json());
-
-        // Prevent express from adding its own X-Powered-By header
-        this.server.disable('x-powered-by');
-        this.server.all('*', (request, response) => this.handleRequest(request, response));
-        this.server.listen(this.cfg.gatewayPort, () => this.log.info(`Listening on port ${this.cfg.gatewayPort}...`));
     }
 }
