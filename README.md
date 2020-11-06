@@ -43,8 +43,7 @@ following sections describe how to run these components.
    cp env-template.txt .env
    ```
 
-2. Use `docker-compose` from the project root to bring up PingDataGovernance in sideband mode. This also brings up the
-   PingData Console.
+2. Use `docker-compose` from the project root to bring up PingDataGovernance in sideband mode.
 
    ```bash
    docker-compose up --detach
