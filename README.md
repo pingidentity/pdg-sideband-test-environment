@@ -20,7 +20,6 @@ ports, copy the provided `env-template.txt` file to `.env` for use by `docker-co
 
 | Environment variable                 | Default port | Description                         |
 | ------------------------------------ | -----------: | ----------------------------------- |
-| PDG\_SIDEBAND\_CONSOLE\_PORT         | 5443         | The PingData Console port.          |
 | PDG\_SIDEBAND\_SMART\_HUB\_PORT      | 6443         | The smart-hub REST API port.        |
 | PDG\_SIDEBAND\_DG\_PORT              | 7443         | The PingDataGovernance Server port. |
 
@@ -58,13 +57,6 @@ following sections describe how to run these components.
    docker container ls --format '{{ .Names }}: {{ .Status }}'
    ```
 
-4. When the containers show a healthy state, you can examine the PingDataGovernance configuration by logging into the
-PingData Console [https://localhost:5443/console/](https://localhost:5443/console/) with the following information:
-
-   | PingDataConsole `Server` | Username      | Password      |
-   | ------------------------ | ------------- | ------------- |
-   | pingdatagovernance       | administrator | 2FederateM0re |
-
 #### Bringing down the environment
 
 1. To stop and remove the containers, run the following command. Note that removing the containers clears any changes
@@ -85,8 +77,8 @@ you made to the PingDataGovernance configuration.
    ```
 
 2. Wait for the server to start. This might take some time (up to 5 minutes on some machines) because the script builds the
-   Docker image, compiles the application, and runs it. If the server has started successfully, you should be able to see
-   something similar to the following log line:
+   Docker image, compiles the application, and runs it. If the server has started successfully, you should see
+   text similar to the following line in the console:
 
    ```
    INFO  [2020-10-07 17:52:11,066] org.eclipse.jetty.server.Server: Started @2109ms
@@ -95,7 +87,7 @@ you made to the PingDataGovernance configuration.
 3. Verify that the server is running by using an HTTP client like `curl` to access an endpoint.
 
    ```bash
-   curl -H "SH-USER: d1f988e8-ae56-485e-a905-dfd478252b7b" http://localhost:8443/homes
+   curl --header "SH-USER: d1f988e8-ae56-485e-a905-dfd478252b7b" http://localhost:8443/homes
    ```
 
    You should receive a JSON array of data.

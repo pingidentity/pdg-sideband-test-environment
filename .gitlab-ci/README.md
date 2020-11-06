@@ -29,7 +29,7 @@ To run the stages locally, you must have the necessary tools installed. Those to
 All of the scripts should be run from the root of the repository.
 
 ```bash
-pdg-tutorials $ bash .gitlab-ci/00-initialization.sh
+$ bash .gitlab-ci/00-initialization.sh
 ```
 
 Be aware that the `02-test-initial-state.sh` script currently modifies the `.env` file at the root of the repository,

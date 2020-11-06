@@ -1,68 +1,92 @@
-# PingDataGovernance Sideband Test Environment Developer Guide
+# PingDataGovernance Sideband Test Environment Maintainer Guide
 
 ## Overview
 
-This document describes features of the pdg-sideband-test-environment relevant to developers. It does not cover the
-GitLab CI pipeline, which is covered in [.gitlab-ci/](../.gitlab-ci/).
+This document describes features of the pdg-sideband-test-environment relevant to repository maintainers. Sideband
+adapter developers should instead refer to the [README.md](../README.md) in the root directory of the project.
+This document does not cover the GitLab CI pipeline, which is covered in [.gitlab-ci/](../.gitlab-ci/).
+In general, all components can be built and run in two ways--by using Docker or by using tools installed
+natively (Maven, Node.js, jq, etc.).
 
-## backend-rest-application
+## smart-hub-application
 
-The backend-rest-application project is a DropWizard project that simulates serving Resources for a simulated smart
+The smart-hub-application project is a DropWizard project that simulates serving Resources for a simulated smart
 device collection. For convenience, we provide a Dockerfile that compiles the project and runs it. For additional
-convenience, we provide a `./run-backend.sh` bash script that builds the Docker image and runs it.
+convenience, we provide a `./run-smart-hub.sh` bash script that builds the Docker image and runs it.
 
-The backend-rest-application project layout follows
+```bash
+./run-smart-hub.sh
+```
+To compile and run the application _without_ Docker, ensure that Maven and Java are installed and run the following:
+
+```bash
+cd smart-hub-application
+mvn clean package
+java -jar target/smart-hub-application-<VERSION>.jar server config.yml
+```
+
+The smart-hub-application project layout follows
 [DropWizard conventions](https://www.dropwizard.io/en/latest/manual/core.html#organizing-your-project). This means that
 if there are any data structure changes, corresponding changes must be made in the
-  `com.pingidentity.dg.backend_rest.api` Java package.
+  `com.pingidentity.dg.smart_hub.api` Java package.
 
 In addition to DropWizard, the project uses [lombok](https://projectlombok.org/) for developer convenience.
 
-### Native usage
+## Policy changes
+
+The pdg-sideband-test-environment server profiles contain policies in two forms, a deployment package 
+([smart-hub.sdp](../server-profiles/pingdatagovernance/instance/smart-hub.sdp)) and a policy snapshot
+([smart-hub.snapshot](../server-profiles/pingdatagovernancepap/policies/smart-hub.snapshot)). To modify the policies,
+a maintainer will need an instance of the PingDataGovernance Policy Administration GUI. A `docker-compose.yml` file, 
+separate from the one in the project root, has been provided in this directory that includes pingdatagovernance, 
+pingdatagovernancepap, and pingdataconsole. The `env-template.txt` in this directory, which contains more environment 
+variable definitions to configure those additional containers, should be copied to `.env` and modified before running 
+docker-compose.
 
 ```bash
-cd backend-rest-application
-mvn clean package
-java -jar target/backend-rest-application-<VERSION>.jar server config.yml
+cp .support/env-template.txt .env
+vim .env
+docker-compose -f .support/docker-compose.yml up
 ```
 
-### Docker usage
+When the containers show a healthy state, you can examine the PingDataGovernance configuration by logging into the    
+PingData Console [https://localhost:5443/console/](https://localhost:5443/console/) with the following information:    
+    
+   | PingDataConsole `Server` | Username      | Password      |    
+   | ------------------------ | ------------- | ------------- |    
+   | pingdatagovernance       | administrator | 2FederateM0re |
+
+You will want to update the pingdatagovernance container to use external PDP mode. This can either be done using the 
+PingData Console, or using the following Docker command:
 
 ```bash
-./run-backend.sh
+docker exec pingdatagovernance /opt/out/instance/bin/dsconfig --no-prompt set-policy-decision-service-prop \
+    --set pdp-mode:external  \
+    --set "policy-server:Policy Administration GUI" 
 ```
 
---or--
+## Data generation
 
-```bash
-cd backend-rest-application
-docker run "$(docker build -q .)"
-```
-
-## Data Generation
-
-The backend-rest-application project expects a `hub.json` file, which contains the backing data for the smart-home. In
+The smart-hub-application project expects a `hub.json` file, which contains the backing data for the smart-home. In
 addition, the ExampleTokenResourceLookupMethod used in the pingdatagovernance server profile requires a JSON file
 mapping usernames (or in our case, UUIDs) to arbitrary user-attribute JSON objects. This file is in
-`server-profiles/pingdatagovernance/instance/users.json`. Generally, you should not regenerate these JSON files because the
-regeneration process produces random data, which will affect documented expected values of test scenarios. However,
-there might be a need to regenerate the data.
+[](../server-profiles/pingdatagovernance/instance/users.json). Generally, you should not regenerate these JSON files
+because the regeneration process produces random data, which will affect documented expected values of test scenarios.
+However, there might be a need to regenerate the data.
+
+After the randomized data is generated, known constant values are added to the data in order for the tests to produce
+predictable results. The logic used to apply these values can be seen in [](./generate-data/index.js).
 
 ### Usage
 
-The repository contains two ways to generate data. The first builds and uses Docker images; the second assumes 
-the developer has all of the necessary dependencies (Maven, Node.js, jq, etc.) installed and runs them natively. The
-native entrypoint should have better performance and reduced resource use.
+A convenience script has been provided that runs all components of the data generation in Docker.
 
 ```bash
 .support/generate.sh
 ```
 
---or--
-
-```bash
-.support/generate-native.sh
-```
+This should be all a maintainer should need to generate the data. If additional detail is desired, the following
+subsections indicate how to run each component individually without Docker.
 
 ### generate-data
 
@@ -70,7 +94,7 @@ The data generation uses the [json-schema-faker](https://github.com/json-schema-
 [faker](https://www.npmjs.com/package/faker) JavaScript libraries on Node.js. The JSON schemas are
 in `.support/generate-data/schemas`. You can run data generation natively with Node.js installed:
 
-#### Native usage
+#### Usage
 
 ```bash
 cd .support/generate-data
@@ -78,28 +102,14 @@ npm install
 node index.js > hub.json
 ```
 
-#### Docker usage
-
-```bash
-cd .support/generate-data
-docker run "$(docker build -q .)" > hub.json
-```
-
 ### extract-users
 
 Once the data is generated, the users must be extracted for consumption by the `ExampleTokenResourceLookupMethod`. This
-is done using jq. Again, a Dockerfile is provided for convenience.
+is done using the following jq command.
 
-#### Native usage
-
-```bash
-jq -c -M .persons backend-rest-application/hub.json > users.json
-```
-
-#### Docker usage
+#### Usage
 
 ```bash
-cd .support/extract-users
-docker run "$(docker build -q .)" > users.json
+jq -c -M .persons smart-hub-application/hub.json > users.json
 ```
 
