@@ -5,7 +5,7 @@ if [ ! -f ./.env ]; then
   exit 1
 fi
 . ./.env
-echo "Building and running smart-hub-application. Please wait a few moments..."
-(cd smart-hub-application && \
+echo "Running smart-hub. Please wait a few moments..."
+(cd smart-hub && \
   docker run -p"$PDG_SIDEBAND_SMART_HUB_PORT":8080 -it \
   $(docker build -q .))

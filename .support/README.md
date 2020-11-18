@@ -5,24 +5,16 @@
 This document describes features of the pdg-sideband-test-environment relevant to repository maintainers. Sideband
 adapter developers should instead refer to the [README.md](../README.md) in the root directory of the project.
 This document does not cover the GitLab CI pipeline, which is covered in [.gitlab-ci/](../.gitlab-ci/).
-In general, all components can be built and run in two ways--by using Docker or by using tools installed
-natively (Maven, Node.js, jq, etc.).
+In general, all scripts should be run from the root of the project, and not from the `.support` folder itself.
 
 ## smart-hub-application
 
 The smart-hub-application project is a DropWizard project that simulates serving Resources for a simulated smart
-device collection. For convenience, we provide a Dockerfile that compiles the project and runs it. For additional
-convenience, we provide a `./run-smart-hub.sh` bash script that builds the Docker image and runs it.
+device collection. For convenience, we provide a script that builds the project using Maven (3.6.3 at time of writing),
+and stages the artifact and configuration to [smart-hub](../smart-hub).
 
 ```bash
-./run-smart-hub.sh
-```
-To compile and run the application _without_ Docker, ensure that Maven and Java are installed and run the following:
-
-```bash
-cd smart-hub-application
-mvn clean package
-java -jar target/smart-hub-application-<VERSION>.jar server config.yml
+./support/build-smart-hub-application.sh
 ```
 
 The smart-hub-application project layout follows
@@ -65,17 +57,24 @@ docker exec pingdatagovernance /opt/out/instance/bin/dsconfig --no-prompt set-po
     --set "policy-server:Policy Administration GUI" 
 ```
 
+When bringing the containers down, don't forget to use the same `docker-compose.yml` file so that docker-compose will
+bring the right set of containers down.
+
+```bash
+docker-compose -f .support/docker-compose.yml down
+```
+
 ## Data generation
 
 The smart-hub-application project expects a `hub.json` file, which contains the backing data for the smart-home. In
 addition, the ExampleTokenResourceLookupMethod used in the pingdatagovernance server profile requires a JSON file
 mapping usernames (or in our case, UUIDs) to arbitrary user-attribute JSON objects. This file is in
-[](../server-profiles/pingdatagovernance/instance/users.json). Generally, you should not regenerate these JSON files
-because the regeneration process produces random data, which will affect documented expected values of test scenarios.
-However, there might be a need to regenerate the data.
+[users.json](../server-profiles/pingdatagovernance/instance/users.json). Generally, you should not 
+regenerate these JSON files because the regeneration process produces random data, which will affect documented 
+expected values of test scenarios.  However, there might be a need to regenerate the data.
 
 After the randomized data is generated, known constant values are added to the data in order for the tests to produce
-predictable results. The logic used to apply these values can be seen in [](./generate-data/index.js).
+predictable results. The logic used to apply these values can be seen in [index.js](./generate-data/index.js).
 
 ### Usage
 
@@ -92,14 +91,15 @@ subsections indicate how to run each component individually without Docker.
 
 The data generation uses the [json-schema-faker](https://github.com/json-schema-faker/json-schema-faker) and the
 [faker](https://www.npmjs.com/package/faker) JavaScript libraries on Node.js. The JSON schemas are
-in `.support/generate-data/schemas`. You can run data generation natively with Node.js installed:
+in `.support/generate-data/schemas`. You can run data generation natively with Node.js installed (v14.11.0 at time of
+writing):
 
 #### Usage
 
 ```bash
 cd .support/generate-data
 npm install
-node index.js > hub.json
+node index.js >hub.json
 ```
 
 ### extract-users
@@ -110,6 +110,6 @@ is done using the following jq command.
 #### Usage
 
 ```bash
-jq -c -M .persons smart-hub-application/hub.json > users.json
+jq -c -M .persons smart-hub-application/hub.json >users.json
 ```
 

@@ -30,7 +30,7 @@ and uses the responses to indicate to its API gateway whether requests should be
 backend REST API application.
 
 This repository allows sideband developers to deploy both PingDataGovernance and an example backend REST API application
-(smart-hub-application) to different hosts/networks in order to simulate more production-like environments. The 
+(smart-hub) to different hosts/networks in order to simulate more production-like environments. The 
 following sections describe how to run these components.
 
 ### PingDataGovernance sideband mode
@@ -65,7 +65,7 @@ you made to the PingDataGovernance configuration.
    docker-compose down
    ```
 
-### smart-hub-application
+### smart-hub
 
 #### Bringing up the environment
 
@@ -76,8 +76,8 @@ you made to the PingDataGovernance configuration.
    ```
 
 2. Wait for the server to start. This might take some time (up to 5 minutes on some machines) because the script builds the
-   Docker image, compiles the application, and runs it. If the server has started successfully, you should see
-   text similar to the following line in the console:
+   Docker image and runs it. If the server has started successfully, you should see text similar to the following line in
+   the console:
 
    ```
    INFO  [2020-10-07 17:52:11,066] org.eclipse.jetty.server.Server: Started @2109ms
