@@ -1,4 +1,12 @@
 #!/bin/sh
+
+# Runs the simulated sideband adapter by building and running the NodeJS docker image. Must be run from
+# the project root.
+#
+# Usage:
+#   .support/run-simulated-sideband-adapter.sh
+#
+
 if [ ! -f ./.env ]; then
   echo "A .env file is needed to run the application."
   echo "Please run 'cp env-template.txt .env', and modify the result if necessary."

@@ -4,6 +4,14 @@ PDG_SIDEBAND_SMART_HUB_PORT=6443
 PDG_SIDEBAND_DG_PORT=7443
 PDG_SIDEBAND_PAP_PORT=8443
 
+# To view example Sideband API request/responses, set the below value to the PingDataGovernance Sideband API host
+# before running ./run-test-harness sideband-api-request-examples where the host is reachable.
+PDG_SIDEBAND_DG_HOST=localhost
+
+# When ready to use the provided test harness against a working sideband adapter/API gateway implementation, use the
+# following environment variable to point the test harness to the base URL of the API gateway.
+PDG_SIDEBAND_TEST_HARNESS_BASE_URL=https://localhost:9443
+
 # When sideband adapters make the /sideband/response call, the PingDataGovernance Server can be configured to accept
 # request context data in different ways, enabling support for API gateways with different capability sets. The
 # following environment variable is used by the PingDataGovernance server as the value for request-context-method.

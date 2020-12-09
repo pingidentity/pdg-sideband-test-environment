@@ -1,3 +1,5 @@
+# You should not need to modify this file. Please modify the variables in your .env file instead. The env-template.txt
+# file contains an example .env file with default values pre-populated.
 version: "2.4"
 
 services:

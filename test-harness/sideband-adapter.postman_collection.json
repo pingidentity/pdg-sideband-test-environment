@@ -1,0 +1,482 @@
+{
+	"info": {
+		"_postman_id": "aa1ab8ca-f9a9-4a3c-bff4-0f7706831469",
+		"name": "PingDataGovernance - Sideband Adapter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1 - Retrieve homes",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c19ccdcd-ac5f-469c-ae32-340011b45d12",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-App-Id",
+						"value": "{{known-app-id}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{test-harness-base-url}}/homes",
+					"host": [
+						"{{test-harness-base-url}}"
+					],
+					"path": [
+						"homes"
+					]
+				},
+				"description": "The test policies `DENY` client requests that are missing an `X-App-Id` header. This test makes a simple `GET` request with that header to make sure the sideband adapter correctly transforms client request headers when fetching inbound decisions from PingDataGovernance."
+			},
+			"response": [
+				{
+					"name": "1 - Retrieve homes",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-App-Id",
+								"value": "{{known-app-id}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway-base-url}}/homes",
+							"host": [
+								"{{gateway-base-url}}"
+							],
+							"path": [
+								"homes"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "date",
+							"value": "Wed, 25 Nov 2020 21:06:10 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "4924"
+						},
+						{
+							"key": "vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "x-banned-users",
+							"value": "l33t_haxor"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"133c-nc65VPoE6g5UUaL5oxaJceebZgw\""
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": \"5b99ccf0-a164-4472-baae-6243768f0a5b\",\n        \"name\": \"infomediaries\",\n        \"image\": \"http://placeimg.com/32/32/business?19253\",\n        \"geo\": {\n            \"lat\": \"43.9169\",\n            \"lng\": \"-96.9792\"\n        },\n        \"members\": [\n            {\n                \"id\": \"7d9fc465-ec1a-460c-ab38-435471f4918b\",\n                \"name\": \"Geoffrey Jacobi\",\n                \"username\": \"Estefania_Johnston93\",\n                \"email\": \"Brigitte.Larson96@gmail.com\",\n                \"phone\": \"1-678-789-5398 x76495\",\n                \"website\": \"jon.info\",\n                \"address\": {\n                    \"street\": \"Ondricka Mills\",\n                    \"suite\": \"Apt. 878\",\n                    \"city\": \"McCulloughberg\",\n                    \"zipcode\": \"08597-8731\",\n                    \"geo\": {\n                        \"lat\": \"85.7690\",\n                        \"lng\": \"-72.3942\"\n                    }\n                },\n                \"company\": {\n                    \"name\": \"Gerhold Group\",\n                    \"catchPhrase\": \"Multi-tiered grid-enabled success\",\n                    \"bs\": \"orchestrate holistic bandwidth\"\n                }\n            },\n            {\n                \"id\": \"f36d5a4d-928b-4c2e-b756-5dcf4a04d2d6\",\n                \"name\": \"Ms. Elias Parisian\",\n                \"username\": \"Caleigh_Runolfsdottir\",\n                \"email\": \"Peter1@hotmail.com\",\n                \"phone\": \"828-450-5544\",\n                \"website\": \"americo.biz\",\n                \"address\": {\n                    \"street\": \"King Field\",\n                    \"suite\": \"Apt. 651\",\n                    \"city\": \"Paxtontown\",\n                    \"zipcode\": \"68214-4942\",\n                    \"geo\": {\n                        \"lat\": \"84.8683\",\n                        \"lng\": \"-43.3431\"\n                    }\n                },\n                \"company\": {\n                    \"name\": \"Rodriguez - Rippin\",\n                    \"catchPhrase\": \"Switchable radical toolset\",\n                    \"bs\": \"harness intuitive technologies\"\n                }\n            }\n        ],\n        \"devices\": [\n            {\n                \"id\": \"7c9149b9-1892-4f30-bc3d-50fdac5c87c2\",\n                \"name\": \"Innovative model\",\n                \"type\": \"appliance\",\n                \"product\": \"Licensed Plastic Soap\",\n                \"vendor\": \"Trantow, Runolfsson and Runte\",\n                \"controls\": [\n                    {\n                        \"id\": \"0096b360-ef51-473a-ac48-14369c081182\",\n                        \"name\": \"media_content\",\n                        \"value\": 62.36294631338606,\n                        \"status\": \"draft\",\n                        \"callsRemaining\": 3,\n                        \"readOnly\": true\n                    },\n                    {\n                        \"id\": \"a2895516-104e-493d-bf1c-651f069e4b7e\",\n                        \"name\": \"level\",\n                        \"value\": 74.47962622850726,\n                        \"status\": \"draft\",\n                        \"callsRemaining\": 10,\n                        \"readOnly\": true\n                    }\n                ]\n            },\n            {\n                \"id\": \"a762a83c-78bd-4b4b-8775-0eb542218067\",\n                \"name\": \"Berkshire EXE\",\n                \"type\": \"dial\",\n                \"product\": \"Generic Steel Cheese\",\n                \"vendor\": \"Mante Group\",\n                \"controls\": [\n                    {\n                        \"id\": \"9ae28efb-852b-4144-8d68-9ea222df76bb\",\n                        \"name\": \"temperature\",\n                        \"value\": 26.955237849027334,\n                        \"status\": \"completed\",\n                        \"callsRemaining\": 9,\n                        \"readOnly\": true\n                    }\n                ]\n            },\n            {\n                \"id\": \"50c6f4d7-2311-4a26-b4ea-284cd8096aef\",\n                \"name\": \"Account Wyoming\",\n                \"type\": \"scale\",\n                \"product\": \"Ergonomic Soft Bacon\",\n                \"vendor\": \"Dicki, Upton and Bechtelar\",\n                \"controls\": [\n                    {\n                        \"id\": \"31be6f94-f228-4bef-b467-d5ebd690dcab\",\n                        \"name\": \"speed\",\n                        \"value\": 80.06295287090883,\n                        \"status\": \"connected\",\n                        \"callsRemaining\": 4,\n                        \"readOnly\": true\n                    },\n                    {\n                        \"id\": \"75a4c1e9-91a4-444e-97f9-e2aade00cb5e\",\n                        \"name\": \"carbon_monoxide\",\n                        \"value\": 26.110541988646595,\n                        \"status\": \"off\",\n                        \"callsRemaining\": 10,\n                        \"readOnly\": true\n                    },\n                    {\n                        \"id\": \"f11de1f8-3125-4181-a210-8228a4b62c3d\",\n                        \"name\": \"speed\",\n                        \"value\": 57.934849308564715,\n                        \"status\": \"online\",\n                        \"callsRemaining\": 9,\n                        \"readOnly\": false\n                    }\n                ]\n            },\n            {\n                \"id\": \"2c7bb479-0937-4032-91fa-fad4557a1ac3\",\n                \"name\": \"RAM Gambia\",\n                \"type\": \"appliance\",\n                \"product\": \"Ergonomic Metal Cheese\",\n                \"vendor\": \"Kemmer - Gusikowski\",\n                \"controls\": [\n                    {\n                        \"id\": \"159fe25b-4bbe-4746-a799-2735a5379459\",\n                        \"name\": \"speed\",\n                        \"value\": 87.24443987226189,\n                        \"status\": \"draft\",\n                        \"callsRemaining\": 2,\n                        \"readOnly\": true\n                    },\n                    {\n                        \"id\": \"041aa498-b9bc-407f-bb4a-464d2c138edc\",\n                        \"name\": \"connection_status\",\n                        \"value\": 99.99329982653875,\n                        \"status\": \"offline\",\n                        \"callsRemaining\": -1,\n                        \"readOnly\": false\n                    },\n                    {\n                        \"id\": \"0851a808-28f7-4add-acf7-6b3bbe730fc6\",\n                        \"name\": \"level\",\n                        \"status\": \"processing\",\n                        \"callsRemaining\": 7,\n                        \"readOnly\": true\n                    },\n                    {\n                        \"id\": \"52723fd9-4602-4f58-b599-6314bf01ec0c\",\n                        \"name\": \"media_content\",\n                        \"value\": 7.314771302989964,\n                        \"status\": \"playing\",\n                        \"callsRemaining\": 8,\n                        \"readOnly\": true\n                    }\n                ]\n            },\n            {\n                \"id\": \"a27e91a8-8862-4ced-a697-7147614ea664\",\n                \"name\": \"Steel definition\",\n                \"type\": \"detector\",\n                \"product\": \"Sleek Plastic Pants\",\n                \"vendor\": \"Sawayn - Murphy\",\n                \"controls\": [\n                    {\n                        \"id\": \"b86ba652-2eb4-48a1-bea9-9cdc3d2a1dab\",\n                        \"name\": \"channel\",\n                        \"value\": 13.241030956026979,\n                        \"status\": \"recording\",\n                        \"callsRemaining\": 1,\n                        \"readOnly\": false\n                    },\n                    {\n                        \"id\": \"9a8fedc6-7c84-4043-992a-ffb07aea2cba\",\n                        \"name\": \"level\",\n                        \"value\": 47.01707368826305,\n                        \"status\": \"pending\",\n                        \"callsRemaining\": 2,\n                        \"readOnly\": false\n                    },\n                    {\n                        \"id\": \"85365562-8beb-4c15-a08a-a07cdf0e22cf\",\n                        \"name\": \"media_content\",\n                        \"value\": 77.83044460108222,\n                        \"status\": \"unknown\",\n                        \"callsRemaining\": 7,\n                        \"readOnly\": true\n                    },\n                    {\n                        \"id\": \"a645530f-2f90-437a-95fe-472e35722287\",\n                        \"name\": \"wind_speed\",\n                        \"status\": \"false\",\n                        \"callsRemaining\": 9,\n                        \"readOnly\": true\n                    },\n                    {\n                        \"id\": \"3ddba559-74a7-4f31-a605-da79a874b6ca\",\n                        \"name\": \"volume\",\n                        \"value\": 92.2636739955373,\n                        \"status\": \"processing\",\n                        \"callsRemaining\": 4,\n                        \"readOnly\": false\n                    }\n                ]\n            },\n            {\n                \"id\": \"83f6e6ae-96fe-4ba9-9480-88a3a33a7add\",\n                \"name\": \"Josh's luxury sedan\",\n                \"type\": \"vehicle\",\n                \"product\": \"Carnivale\",\n                \"vendor\": \"Panaphonics\",\n                \"controls\": [\n                    {\n                        \"id\": \"1da1a20f-6707-40b3-a2af-a6bc9054b640\",\n                        \"name\": \"power\",\n                        \"value\": 88000,\n                        \"status\": \"off\",\n                        \"callsRemaining\": 0,\n                        \"readOnly\": false\n                    }\n                ]\n            },\n            {\n                \"id\": \"4aeb0a59-f731-4e12-be5b-1ff420b6eef3\",\n                \"name\": \"e-enable Dynamic\",\n                \"type\": \"media_player\",\n                \"product\": \"Refined Rubber Shirt\",\n                \"vendor\": \"Heaney - Kozey\",\n                \"controls\": [\n                    {\n                        \"id\": \"2508de80-5d46-4cc6-8690-a4ad6e9f047f\",\n                        \"name\": \"connection_status\",\n                        \"value\": 91.45720621366439,\n                        \"status\": \"online\",\n                        \"callsRemaining\": 3,\n                        \"readOnly\": false\n                    }\n                ]\n            },\n            {\n                \"id\": \"83f6e6ae-96fe-4ba9-9480-88a3a33a7add\",\n                \"name\": \"Josh's luxury sedan\",\n                \"type\": \"vehicle\",\n                \"product\": \"Carnivale\",\n                \"vendor\": \"Panaphonics\",\n                \"controls\": [\n                    {\n                        \"id\": \"1da1a20f-6707-40b3-a2af-a6bc9054b640\",\n                        \"name\": \"power\",\n                        \"value\": 88000,\n                        \"status\": \"off\",\n                        \"callsRemaining\": 0,\n                        \"readOnly\": false\n                    }\n                ]\n            }\n        ]\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "2 - Retrieve devices",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7bcfecc0-d20a-4ba3-9739-8de48bdf0ec9",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"X-Powered-By is not present\", function () {",
+							"    pm.response.to.not.have.header(\"X-Powered-By\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-App-Id",
+						"value": "{{known-app-id}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{test-harness-base-url}}/devices",
+					"host": [
+						"{{test-harness-base-url}}"
+					],
+					"path": [
+						"devices"
+					]
+				},
+				"description": "The policies remove the `X-Powered-By` header returned by the backend API. This test retrieves a list of devices to make sure that the sideband adapter correctly relays response headers when requesting outbound decisions from PingDataGovernance."
+			},
+			"response": []
+		},
+		{
+			"name": "3 - Retrieve devices by name",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23e030f3-2d20-4c81-853b-fcf5ee35c942",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"At least one device\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.length).greaterThan(0);",
+							"});",
+							"pm.test(\"Each device name has 'sedan' in it.\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.map(device => device.name.toLowerCase()).reduce((acc, name) => (name.indexOf(\"sedan\") === -1 ? false : acc), true)).eq(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-App-Id",
+						"value": "{{known-app-id}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{test-harness-base-url}}/devices?name=sedan&operator=contains",
+					"host": [
+						"{{test-harness-base-url}}"
+					],
+					"path": [
+						"devices"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "sedan"
+						},
+						{
+							"key": "operator",
+							"value": "contains"
+						}
+					]
+				},
+				"description": "The test policies convert incoming query strings to the format used by the backend application. A `?operator=contains&name=<FILTER>` should be transformed to `?co=<FILTER>`. This test ensures that the sideband adapter correctly transforms client query strings when requesting inbound decisions from PingDataGovernance."
+			},
+			"response": []
+		},
+		{
+			"name": "4 - Retrieve a person",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f110765-88c1-43e3-b677-e243063191f5",
+						"exec": [
+							"const shouldSkip = pm.variables.get(\"request-context-method\") === 'none';",
+							"",
+							"",
+							"(shouldSkip ? pm.test.skip : pm.test)(\"Status code is 403\", function () {",
+							"    pm.response.to.have.status(403);",
+							"});",
+							"(shouldSkip ? pm.test.skip : pm.test)(\"Message contains 'banned'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.contain(\"banned\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "e8a0f893-0753-484c-b792-9e3bc0db27f9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{banned-bearer-token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-App-Id",
+						"value": "{{known-app-id}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{test-harness-base-url}}/persons/{{known-person-id}}",
+					"host": [
+						"{{test-harness-base-url}}"
+					],
+					"path": [
+						"persons",
+						"{{known-person-id}}"
+					]
+				},
+				"description": "The test policies make sure that a banned user cannot retrieve any data. Banned person IDs are provided in a response header by the backend application. This test ensures that the sideband adapter relays response headers and the token owner `state` correctly when requesting outbound decisions."
+			},
+			"response": []
+		},
+		{
+			"name": "5 - Add a device to a home",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "269ef35f-a751-4c51-ab6d-a91a337d4a2f",
+						"exec": [
+							"pm.test(\"Should be a home entity with the newly linked device\", function () {",
+							"    const knownDeviceId = pm.variables.get(\"known-device-id\");",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.devices.map(device => device.id).reduce((acc, id) => knownDeviceId === id ? true: acc), false).to.eq(true);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "X-App-Id",
+						"value": "{{known-app-id}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"{{known-device-id}}\",\n    \"audit\": \"3eba0426d793ab17c00176cbdf176daa90665c68ae96f0a8e820fb0ad9e3dcc2743695f122cd1d5100d0be59d65abb122403d693a885d92ec932b28cd9d7661f\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{test-harness-base-url}}/homes/{{known-home-id}}/devices",
+					"host": [
+						"{{test-harness-base-url}}"
+					],
+					"path": [
+						"homes",
+						"{{known-home-id}}",
+						"devices"
+					]
+				},
+				"description": "The test policies `DENY` modification requests (`POST`/`PUT`/`PATCH`) without an `audit` property. The backend API is unaware of this property and considers such requests invalid, so the policies remove the property before forwarding. This test checks that the sideband adapter correctly transforms a client request body (leaving the `audit` property intact) before making an inbound PingDataGovernance request."
+			},
+			"response": []
+		},
+		{
+			"name": "6 - Change a control state",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "17629ea5-c07f-4a93-8e37-5903c28d3f3f",
+						"exec": [
+							"pm.test(\"Status code is 402\", function () {",
+							"    pm.response.to.have.status(402);",
+							"});",
+							"pm.test(\"Should indicate that there are no more calls remaining\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.message).to.contain(\"limit\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "X-App-Id",
+						"value": "{{known-app-id}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"power\",\n    \"value\": \"88000\",\n    \"status\": \"on\",\n    \"callsRemaining\": 10,\n    \"audit\": \"3eba0426d793ab17c00176cbdf176daa90665c68ae96f0a8e820fb0ad9e3dcc2743695f122cd1d5100d0be59d65abb122403d693a885d92ec932b28cd9d7661f\",\n    \"readOnly\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{test-harness-base-url}}/controls/{{known-control-id}}",
+					"host": [
+						"{{test-harness-base-url}}"
+					],
+					"path": [
+						"controls",
+						"{{known-control-id}}"
+					]
+				},
+				"description": "The test policies have a rule that `DENY` device control state changes when the `remaining` property has reached `0`, indicating that the number of calls have exceeded the daily limit. This test expects that policy rule to trigger thereby ensuring that the sideband adapter is correctly transforming backend response bodies when making outbound requests to PingDataGovernance."
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{known-bearer-token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "86022a57-a79d-4499-b3a8-ba8ab32eb2bf",
+				"type": "text/javascript",
+				"exec": [
+					"// Add the Accept: application/json header to all requests",
+					"pm.request.headers.add({ key: 'Accept', value: 'application/json' });",
+					"",
+					"// Print the request description",
+					"console.info(pm.request.description.content);"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "92b26a84-e8bc-4c97-bf5a-203e969d0302",
+				"type": "text/javascript",
+				"exec": [
+					"pm.test(\"Response is valid JSON\", function () {",
+					"    var jsonData = pm.response.json();",
+					"    typeof jsonData === 'object';",
+					"});"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "be8bc9c4-a7b9-44d1-84c8-beb79a7d6c0e",
+			"key": "banned-app-id",
+			"value": "BAN"
+		},
+		{
+			"id": "628cb11b-16d8-4e7a-a0d7-f64d04922266",
+			"key": "banned-bearer-token",
+			"value": "{\"active\":true,\"sub\":\"{{banned-user-id}}\"}"
+		},
+		{
+			"id": "a2da90b1-eb1d-42ce-9609-72a3ae223e42",
+			"key": "banned-user-id",
+			"value": "705fd0eb-380c-4007-a2da-900ea8d58987"
+		},
+		{
+			"id": "553b2396-1815-4b4d-93c8-ad0355f546a1",
+			"key": "banned-username",
+			"value": "l33t_haxor"
+		},
+		{
+			"id": "ab6cc99e-9112-4117-ab85-26b0e17fe0cb",
+			"key": "known-app-id",
+			"value": "PNG"
+		},
+		{
+			"id": "e40b6820-0161-4cae-851c-808c4ffd75ff",
+			"key": "known-bearer-token",
+			"value": "{\"active\":true,\"sub\":\"{{known-user-id}}\"}"
+		},
+		{
+			"id": "87564907-f934-44ad-8d26-f960613705e6",
+			"key": "known-control-id",
+			"value": "1da1a20f-6707-40b3-a2af-a6bc9054b640"
+		},
+		{
+			"id": "d575666c-ead2-48ef-a390-6ed76e92774c",
+			"key": "known-device-id",
+			"value": "83f6e6ae-96fe-4ba9-9480-88a3a33a7add"
+		},
+		{
+			"id": "1e8e8207-76f6-475b-8267-baa2e1afc110",
+			"key": "known-home-id",
+			"value": "5b99ccf0-a164-4472-baae-6243768f0a5b"
+		},
+		{
+			"id": "a55f5a6a-c66c-4712-97c6-6acedf028c60",
+			"key": "known-person-id",
+			"value": "7d9fc465-ec1a-460c-ab38-435471f4918b"
+		},
+		{
+			"id": "8119fb68-bb72-4b5a-94b4-d9fc6477cab4",
+			"key": "known-user-id",
+			"value": "7d9fc465-ec1a-460c-ab38-435471f4918b"
+		},
+		{
+			"id": "3d654117-3f16-4d77-869c-a8a5630fe9d5",
+			"key": "request-context-method",
+			"value": "state"
+		},
+		{
+			"id": "1c26aefe-eed0-4204-a9ab-77081713448c",
+			"key": "test-harness-base-url",
+			"value": "http://localhost:8080"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
