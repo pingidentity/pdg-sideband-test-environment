@@ -1,7 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
-# Generate data for consumption by the PingDataGovernance Side Test Environment.
-set -e pipefail
+# Generates data for consumption by the PingDataGovernance Side Test Environment by building and running the NodeJS
+# Docker image, copying the output to the staging location and a `jq` Docker image to transform the output for use by
+# the ExampleTokenResourceLookupMethod. Must be run from the project root directory.
+#
+# Usage:
+#   .support/generate.sh
+#
 
 echo "Generating data..."
 

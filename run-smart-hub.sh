@@ -1,4 +1,10 @@
 #!/bin/sh
+#
+# Runs the smart-hub application. Takes no arguments. Must be run from the project root.
+#
+# Example:
+#   ./run-smart-hub.sh
+#
 if [ ! -f ./.env ]; then
   echo "A .env file is needed to run the application."
   echo "Please run 'cp env-template.txt .env', and modify the result if necessary."
