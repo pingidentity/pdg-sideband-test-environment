@@ -229,6 +229,12 @@ To run this collection, complete these steps:
      └
    ```
 
+There are two folders in the request examples, which correspond to the two methods that [access
+tokens](#access-token-validation) are provided to the PingDataGovernance Sideband API. The first folder, "Authorization
+Header", contains example requests with the access token represented as an Authorization header. The second folder,
+"Access Token Property", contains example requests where the access token is provided pre-parsed by the sideband
+adapter in the `access_token` JSON property.
+
 #### Test harness
 
 After setting up the sideband adapter to handle HTTP client requests, a developer can use a
@@ -402,6 +408,25 @@ After you decide on a `request-context-method`, a sideband adapter developer can
 sideband test environment by modifying their `.env` file in the root of this repository. The value
 `PDG_SIDEBAND_REQUEST_CONTEXT_METHOD` is consumed by the PingDataGovernance Server docker-compose environment and the
 test harness, which skips related tests if the value is set to `none`.
+
+### Access token validation
+
+The PingDataGovernance Sideband API accepts OAuth 2 access tokens in two ways:
+
+* As an Authorization header
+  PingDataGovernance performs the access token validation and parsing.
+
+* As pre-parsed JSON
+  An upstream component of the API gateway/sideband adapter performs the validation and parsing.
+
+The sideband test environment configures both a Mock Access Token Validator and an External API Gateway Access Token
+Validator for sideband adapter developers to test both cases. However, in typical deployments, you need configure only
+one Access Token Validator type.
+
+When developing a sideband adapter, if your environment performs access token validation and provides a way for the
+adapter to obtain the parsed access token, the second option results in less HTTP communication and processing. Keep in mind
+though, that even if the environment supports that capability, a particular deployment may wish to delegate
+authentication entirely to DG, which would require using the first option.
 
 ### Postman collection coverage
 
