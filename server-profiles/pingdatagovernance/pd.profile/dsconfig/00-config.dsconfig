@@ -49,7 +49,18 @@ dsconfig set-trust-manager-provider-prop \
 dsconfig create-access-token-validator \
     --validator-name 'Mock Access Token Validator'  \
     --type mock  \
-    --set enabled:true 
+    --set enabled:true \
+    --set evaluation-order-index:2
+
+# An External API Gateway Access Token Validator is used when the API
+# gateway/sideband adapter has already validated the access token validator
+# and can provide the parsed token to the Sideband API. A typical deployment
+# only needs one Access Token Validator.
+dsconfig create-access-token-validator \
+    --validator-name 'External API Gateway Access Token Validator' \
+    --type external-api-gateway \
+    --set enabled:true \
+    --set evaluation-order-index:1
 
 # A Token Resource Lookup Method correlates the access token subject to an
 # identity. This Token Resource Lookup Method expects the value of an access
@@ -62,52 +73,22 @@ dsconfig create-token-resource-lookup-method \
     --set extension-class:com.unboundid.directory.sdk.examples.ExampleTokenResourceLookupMethod \
     --set extension-argument:users-file=users.json
 
+# The same Token Resource Lookup Method is configured for the External API
+# Gateway Access Token Validator.
+dsconfig create-token-resource-lookup-method \
+    --validator-name 'External API Gateway Access Token Validator'  \
+    --method-name 'Example Token Resource Lookup Method'  \
+    --type third-party  \
+    --set evaluation-order-index:1  \
+    --set extension-class:com.unboundid.directory.sdk.examples.ExampleTokenResourceLookupMethod \
+    --set extension-argument:users-file=users.json
+
 # Associate the Mock Access Token Validator with the main Sideband API
 # endpoint.
 dsconfig set-sideband-api-endpoint-prop \
     --endpoint-name Default  \
-    --set "access-token-validator:Mock Access Token Validator"
-
-# Create Sideband API endpoints for the backend REST application.
-dsconfig create-sideband-api-endpoint \
-    --endpoint-name "Home Instance"  \
-    --set "access-token-validator:Mock Access Token Validator"  \
-    --set "base-path:/homes/{homeId}"
-
-dsconfig create-sideband-api-endpoint \
-    --endpoint-name "Home Members"  \
-    --set "access-token-validator:Mock Access Token Validator"  \
-    --set "base-path:/homes/{homeId}/members"
-
-dsconfig create-sideband-api-endpoint \
-    --endpoint-name "Home Member Instance"  \
-    --set "access-token-validator:Mock Access Token Validator"  \
-    --set "base-path:/homes/{homeId}/members/{memberId}"
-
-dsconfig create-sideband-api-endpoint \
-    --endpoint-name "Home Devices"  \
-    --set "access-token-validator:Mock Access Token Validator"  \
-    --set "base-path:/homes/{homeId}/devices"
-
-dsconfig create-sideband-api-endpoint \
-    --endpoint-name "Home Devices Instance"  \
-    --set "access-token-validator:Mock Access Token Validator"  \
-    --set "base-path:/homes/{homeId}/devices/{deviceId}"
-
-dsconfig create-sideband-api-endpoint \
-    --endpoint-name "Devices Instance"  \
-    --set "access-token-validator:Mock Access Token Validator"  \
-    --set "base-path:/devices/{deviceId}"
-
-dsconfig create-sideband-api-endpoint \
-    --endpoint-name "Person Instance"  \
-    --set "access-token-validator:Mock Access Token Validator"  \
-    --set "base-path:/persons/{personId}"
-
-dsconfig create-sideband-api-endpoint \
-    --endpoint-name "Control Instance"  \
-    --set "access-token-validator:Mock Access Token Validator"  \
-    --set "base-path:/controls/{controlId}"
+    --set "access-token-validator:Mock Access Token Validator" \
+    --set "access-token-validator:External API Gateway Access Token Validator"
 
 # The Policy Decision Service controls how PingDataGovernance Server makes
 # policy requests to the policy engine. This configures PingDataGovernance
