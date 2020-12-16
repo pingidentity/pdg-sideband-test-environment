@@ -6,53 +6,40 @@
 	},
 	"item": [
 		{
-			"name": "1 - Retrieve homes",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "d3055deb-023e-4d9b-9b47-f08db670e81c",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"GET\",\n    \"url\": \"{{test-harness-base-url}}/homes\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {{known-bearer-token}}\"\n        },\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{pdg-base-url}}/sideband/request",
-					"host": [
-						"{{pdg-base-url}}"
-					],
-					"path": [
-						"sideband",
-						"request"
-					]
-				}
-			},
-			"response": [
+			"name": "Authorization Header",
+			"item": [
 				{
 					"name": "1 - Retrieve homes",
-					"originalRequest": {
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d3055deb-023e-4d9b-9b47-f08db670e81c",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d6d9e296-d511-4cc7-be2a-c535074a59b5",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"source_ip\": \"35.243.52.11\",\n    \"source_port\": 333,\n    \"method\": \"GET\",\n    \"url\": \"https://api.example.com/homes\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"X-App-Id\": \"PNG\"\n        }\n    ]\n}",
+							"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"GET\",\n    \"url\": \"{{test-harness-base-url}}/homes\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {{known-bearer-token}}\"\n        },\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -70,84 +57,84 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "Date",
-							"value": "Wed, 02 Dec 2020 23:19:24 GMT"
-						},
-						{
-							"key": "Correlation-Id",
-							"value": "28b032de-8370-4561-acdc-a551233209b4"
-						},
-						{
-							"key": "Content-Type",
-							"value": "application/json"
-						},
-						{
-							"key": "Content-Length",
-							"value": "1066"
+							"name": "1 - Retrieve homes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"source_ip\": \"35.243.52.11\",\n    \"source_port\": 333,\n    \"method\": \"GET\",\n    \"url\": \"https://api.example.com/homes\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"X-App-Id\": \"PNG\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{pdg-base-url}}/sideband/request",
+									"host": [
+										"{{pdg-base-url}}"
+									],
+									"path": [
+										"sideband",
+										"request"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 02 Dec 2020 23:19:24 GMT"
+								},
+								{
+									"key": "Correlation-Id",
+									"value": "28b032de-8370-4561-acdc-a551233209b4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1066"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"source_ip\": \"35.243.52.11\",\n    \"source_port\": 333,\n    \"method\": \"GET\",\n    \"url\": \"https://api.example.com/homes\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"SH-USER\": \"7d9fc465-ec1a-460c-ab38-435471f4918b\"\n        }\n    ],\n    \"state\": \"H4sIAAAAAAAAAK1Ty5LaMBD8FZXOtsHYwJpTdhPyrK2kwiY5hBQ1yANWIUuOJPNYl_89I2CTK4ecbE1Pj6a7Wh23-LtF5_ms4860VuBKNnzGs3EyyrNkPErSlEcvUGMsdWZZFvEafWVK6nw3f6KG1ir6r7xv3GwwgEYmeIS6UZgIUw8qU6OjroCv9midNJra0yTMrhBKKvHZz47ftzTVymfwl44HBIuWdUsOwss9LvnM2xajJXftmg5LPi2Ljcgn4xhFCnE-GYoY1tldnGfjfJpu8iK9o8ae91HHF-_jb4v5V7r5Fhbvf_UR92aH-jsoWYI3lqiPRuzYvRDoHHsKIPuHRrRmAM71YOnluDoPIe5_0BGuCE5cjeCtQ_sy_2xNcOZWhVd5K3PQGLTdZsuV9flC6riGmta5jRxR4C45C_ZcmZ9kvUarTuy1NRpCmkjUFfshlZJQr94YrVGpE6FYgwxpe2uxtFLs0uGrE1TGhKgRDGVJd1CeKNHeIlJi-Vwpd6DwVuzRtNpTl2ulD1svwpdNh0OqCelPoRmcZx9bJdEr0CUBz7IRpjyLvMtHU6ps0YQLFITpcTZKstE0p7rSWyqkwzyZpMWY95SgpjI6UIsijYtRFhdpnrLjeDg5Ew64dpdNdqQKT4mmhWkVUzegaZu_Jj0YJwz7oEVAwYvqS2XBhcHzo0ddYsk2pLuKfSX1Tuota8CCUqikC7asyRG-ASGV9ECSpdZmT-9sjwyPDVqJmqJL74TL8Kxvi0Lf_wEYYmikQgQAAA\"\n}"
 						}
-					],
-					"cookie": [],
-					"body": "{\n    \"source_ip\": \"35.243.52.11\",\n    \"source_port\": 333,\n    \"method\": \"GET\",\n    \"url\": \"https://api.example.com/homes\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"SH-USER\": \"7d9fc465-ec1a-460c-ab38-435471f4918b\"\n        }\n    ],\n    \"state\": \"H4sIAAAAAAAAAK1Ty5LaMBD8FZXOtsHYwJpTdhPyrK2kwiY5hBQ1yANWIUuOJPNYl_89I2CTK4ecbE1Pj6a7Wh23-LtF5_ms4860VuBKNnzGs3EyyrNkPErSlEcvUGMsdWZZFvEafWVK6nw3f6KG1ir6r7xv3GwwgEYmeIS6UZgIUw8qU6OjroCv9midNJra0yTMrhBKKvHZz47ftzTVymfwl44HBIuWdUsOwss9LvnM2xajJXftmg5LPi2Ljcgn4xhFCnE-GYoY1tldnGfjfJpu8iK9o8ae91HHF-_jb4v5V7r5Fhbvf_UR92aH-jsoWYI3lqiPRuzYvRDoHHsKIPuHRrRmAM71YOnluDoPIe5_0BGuCE5cjeCtQ_sy_2xNcOZWhVd5K3PQGLTdZsuV9flC6riGmta5jRxR4C45C_ZcmZ9kvUarTuy1NRpCmkjUFfshlZJQr94YrVGpE6FYgwxpe2uxtFLs0uGrE1TGhKgRDGVJd1CeKNHeIlJi-Vwpd6DwVuzRtNpTl2ulD1svwpdNh0OqCelPoRmcZx9bJdEr0CUBz7IRpjyLvMtHU6ps0YQLFITpcTZKstE0p7rSWyqkwzyZpMWY95SgpjI6UIsijYtRFhdpnrLjeDg5Ew64dpdNdqQKT4mmhWkVUzegaZu_Jj0YJwz7oEVAwYvqS2XBhcHzo0ddYsk2pLuKfSX1Tuota8CCUqikC7asyRG-ASGV9ECSpdZmT-9sjwyPDVqJmqJL74TL8Kxvi0Lf_wEYYmikQgQAAA\"\n}"
-				}
-			]
-		},
-		{
-			"name": "2 - Retrieve devices",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "56650b1d-395f-4b53-96c5-046438247795",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"pm.test(\"X-Powered-By is not present\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.headers.reduce(function(acc, header) { return Object.keys(header)[0] === \"X-Powered-By\" ? true : acc }, false)).eq(false);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"GET\",\n    \"url\": \"{{smart-hub-base-url}}/devices\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {{known-bearer-token}}\"\n        },\n        {\n            \"X-Powered-By\": \"SmartHub Server Supreme\"\n        }\n    ]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{pdg-base-url}}/sideband/response",
-					"host": [
-						"{{pdg-base-url}}"
-					],
-					"path": [
-						"sideband",
-						"response"
 					]
-				}
-			},
-			"response": [
+				},
 				{
 					"name": "2 - Retrieve devices",
-					"originalRequest": {
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "56650b1d-395f-4b53-96c5-046438247795",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"X-Powered-By is not present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.headers.reduce(function(acc, header) { return Object.keys(header)[0] === \"X-Powered-By\" ? true : acc }, false)).eq(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"GET\",\n    \"url\": \"https://smart-hub.example.com/devices\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"X-Powered-By\": \"SmartHub Server Supreme\"\n        }\n    ]\n}",
+							"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"GET\",\n    \"url\": \"{{smart-hub-base-url}}/devices\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"X-Powered-By\": \"SmartHub Server Supreme\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -165,285 +152,749 @@
 							]
 						}
 					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "json",
-					"header": [
+					"response": [
 						{
-							"key": "Date",
-							"value": "Wed, 02 Dec 2020 23:25:09 GMT"
+							"name": "2 - Retrieve devices",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"GET\",\n    \"url\": \"https://smart-hub.example.com/devices\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"X-Powered-By\": \"SmartHub Server Supreme\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{pdg-base-url}}/sideband/response",
+									"host": [
+										"{{pdg-base-url}}"
+									],
+									"path": [
+										"sideband",
+										"response"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 02 Dec 2020 23:25:09 GMT"
+								},
+								{
+									"key": "Correlation-Id",
+									"value": "dbe503c4-b1c4-4650-a542-c9df234890bd"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "234"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response_code\": \"200\",\n    \"response_status\": \"OK\",\n    \"url\": \"https://smart-hub.example.com/devices\",\n    \"method\": \"GET\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "3 - Retrieve devices by name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "55c73af7-f25c-4c77-966a-02c91daa15dc",
+								"exec": [
+									"pm.test(\"Backend URL contains transformed query string\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.url.indexOf(\"compare=co\") !== -1).eq(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"GET\",\n    \"url\": \"{{test-harness-base-url}}/devices?name=sedan&operator=contains\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {{known-bearer-token}}\"\n        },\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/request",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4 - Retrieve a person",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8bd506f-539c-4c8b-b8ec-893910ffb476",
+								"exec": [
+									"// Use the variable set in the pre-request script to determine if the tests should be skipped.",
+									"const shouldSkip = pm.variables.get('shouldSkip');",
+									"",
+									"(shouldSkip ? pm.test.skip : pm.test)(\"Status code is 403\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.response_code).to.eql('403');",
+									"});",
+									"(shouldSkip ? pm.test.skip : pm.test)(\"Message contains 'banned'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(JSON.parse(jsonData.body).message).to.contain('banned');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						},
 						{
-							"key": "Correlation-Id",
-							"value": "dbe503c4-b1c4-4650-a542-c9df234890bd"
+							"listen": "prerequest",
+							"script": {
+								"id": "fe40630a-c528-4c64-907d-81ce9cc1db33",
+								"exec": [
+									"const { Property } = require('postman-collection');",
+									"",
+									"// The request context method dictates how the request context is populated by the sideband adapter.",
+									"// It drives the structure and content of the request body sent to `/sideband/response`.",
+									"const requestContextMethod = pm.variables.get('request-context-method');",
+									"",
+									"// When the requestContextMethod is \"none\", we need to skip the tests",
+									"const shouldSkip = requestContextMethod === 'none';",
+									"if (shouldSkip) {",
+									"    pm.variables.set('shouldSkip', shouldSkip);",
+									"} else {",
+									"",
+									"    // Start with the request body common to both request-context-methods, then add either the \"state\" or \"request\" property depending on",
+									"    // the value of ",
+									"    const requestBody = {",
+									"        response_code: \"200\",",
+									"        response_status: \"OK\",",
+									"        method: \"GET\",",
+									"        url: \"{{smart-hub-base-url}}/persons/{{known-person-id}}\",",
+									"        http_version: \"1.1\",",
+									"        headers: [",
+									"            {",
+									"                \"X-Banned-Users\": \"{{banned-username}}\"",
+									"            },",
+									"            {",
+									"                \"X-Powered-By\": \"SmartHub Server Supreme\"",
+									"            }",
+									"        ],",
+									"        body: \"{\\\"id\\\":\\\"{{known-person-id}}\\\",\\\"name\\\":\\\"Bruce Heller\\\",\\\"username\\\":\\\"Lyla69\\\",\\\"email\\\":\\\"Geovanni_Mueller66@gmail.com\\\",\\\"phone\\\":\\\"475.765.5023 x4199\\\",\\\"website\\\":\\\"breana.info\\\",\\\"address\\\":{\\\"street\\\":\\\"Joel Via\\\",\\\"suite\\\":\\\"Suite 111\\\",\\\"city\\\":\\\"Judyville\\\",\\\"zipcode\\\":\\\"43591\\\",\\\"geo\\\":{\\\"lat\\\":\\\"-37.6256\\\",\\\"lng\\\":\\\"169.6589\\\"}},\\\"company\\\":{\\\"name\\\":\\\"Hilpert Group\\\",\\\"catchPhrase\\\":\\\"Configurable composite portal\\\",\\\"bs\\\":\\\"transform rich mindshare\\\"}}\"",
+									"    };",
+									"    switch (requestContextMethod) {",
+									"        case 'state':",
+									"            Object.assign(requestBody, {",
+									"                state: 'H4sIAAAAAAAAAK1TTY-bMBD9K5YvvWAWAllITs1WUVupq62a7YfUVNEAU3BjMLXN7mYj_nvHJNtec6i4wJuZ5zeP5yM3-HtA6_jyyK0eTIk72fMlj2dZGNET8-AF77WhtjzKo4C36BpdUd_b9T11DEbRe-Ncv7y6UroE1Wjrltdpmlw1ukVLPb66e0Bjpe78ARN1g1ARxJffj3w1EKeRz-BOHTcIBg07bjmUTj7gli-dGTDYcjsU9LHlWTT_WUVYiCSPSpFGUSZgVoFYRBFCXs3zRZ5t-cjH4Mi_iVXfi_de82a1maDNO_F5s_5EyCVEfPwxBtzpPXZfQMkKnDY0eqvLPVuVJVrL7n2R_asGpNwXJtw7fPrcTSQ0-x9W80d4c87e8MGieeGf3PJmXbrheb2dfuzQ73aZLeepu9PQkXfQkpzLhgPK3yl23p7z5O3B6I59xYJEULZoo3NBJYnbNfBExgccW5A-dWt1sBjegtnb17XHwlK3VIeqIm6KFgXbGUTKLl87J5HdGz9JuR6k80pXvQsZhYWgUroDITcG9oN15ANhz7IvdTWtlM7jWCwWSUZwjdpzK_DEYj4PZ4vU46qrCVikYRxlMR8pM32jOz8eiyTLxXUSiyid-dMesbAnCb-gBRUW8plQkt9DRzL-GvJBOqcwYHev3uiOfg2DrmI3aGr07eDK5mNjwE67tKikNuCwYrXSBShmD9Zhy7CrJckIeEGe8AZM5yNbGFnurSBCUSr_yk5XWytdS7q3JF_6O3NZFMbxD9iHp7BRBAAA'",
+									"                });",
+									"            break;",
+									"        case 'request':",
+									"            Object.assign(requestBody, {",
+									"                request: {",
+									"                    source_ip: `${Property.replaceSubstitutions(\"{{$randomIP}}\")}`,",
+									"                    source_port: pm.variables.get('_valid-port'),",
+									"                    method: \"GET\",",
+									"                    url: \"{{test-harness-base-url}}/persons/{{known-person-id}}\",",
+									"                    http_version: \"1.1\",",
+									"                    headers: [",
+									"                        {",
+									"                            \"Authorization\": \"Bearer {{banned-bearer-token}}\"",
+									"                        },",
+									"                        {",
+									"                            \"X-App-Id\": \"{{known-app-id}}\"",
+									"                        }",
+									"                    ]",
+									"                }",
+									"            });",
+									"            break;",
+									"    };",
+									"    pm.variables.set(\"requestBody\", JSON.stringify(requestBody));",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{requestBody}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/response",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"response"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 - Add a device to a home",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "84c29b2f-1731-46b9-acf8-2f83c7f3313e",
+								"exec": [
+									"pm.test(\"Should not forward audit property\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.body).to.not.contain(\"audit\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"PUT\",\n    \"url\": \"{{test-harness-base-url}}/homes/{{known-home-id}}/devices\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {{known-bearer-token}}\"\n        },\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ],\n    \"body\": \"{\\\"id\\\":\\\"{{known-device-id}}\\\",\\\"audit\\\": \\\"{{$guid}}\\\"}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/request",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 - Change a control state",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7c5db144-bf04-436f-947c-e6c5c772a7c3",
+								"exec": [
+									"pm.test(\"Status code is 402\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.response_code).eq(\"402\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"PATCH\",\n    \"url\": \"{{smart-hub-base-url}}/controls/{{known-control-id}}\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ],\n    \"body\": \"{\\\"name\\\": \\\"power\\\", \\\"value\\\":\\\"80000\\\",\\\"status\\\":\\\"on\\\", \\\"callsRemaining\\\": 0, \\\"readOnly\\\": false}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/response",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"response"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Access Token Property",
+			"item": [
+				{
+					"name": "1 - Retrieve homes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "fcb381d5-1373-4ff7-ae0a-3f189aacf021",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						},
 						{
-							"key": "Content-Type",
-							"value": "application/json"
+							"listen": "prerequest",
+							"script": {
+								"id": "d4e4e9c5-dacc-477d-a0a7-0472bc2a2a16",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"GET\",\n    \"url\": \"{{test-harness-base-url}}/homes\",\n    \"http_version\": \"1.1\",\n    \"access_token\": {\n        \"active\": true,\n        \"sub\": \"{{known-user-id}}\"\n    },\n    \"headers\": [\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/request",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"request"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "1 - Retrieve homes",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"source_ip\": \"35.243.52.11\",\n    \"source_port\": 333,\n    \"method\": \"GET\",\n    \"url\": \"https://api.example.com/homes\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"X-App-Id\": \"PNG\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{pdg-base-url}}/sideband/request",
+									"host": [
+										"{{pdg-base-url}}"
+									],
+									"path": [
+										"sideband",
+										"request"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 02 Dec 2020 23:19:24 GMT"
+								},
+								{
+									"key": "Correlation-Id",
+									"value": "28b032de-8370-4561-acdc-a551233209b4"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1066"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"source_ip\": \"35.243.52.11\",\n    \"source_port\": 333,\n    \"method\": \"GET\",\n    \"url\": \"https://api.example.com/homes\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"SH-USER\": \"7d9fc465-ec1a-460c-ab38-435471f4918b\"\n        }\n    ],\n    \"state\": \"H4sIAAAAAAAAAK1Ty5LaMBD8FZXOtsHYwJpTdhPyrK2kwiY5hBQ1yANWIUuOJPNYl_89I2CTK4ecbE1Pj6a7Wh23-LtF5_ms4860VuBKNnzGs3EyyrNkPErSlEcvUGMsdWZZFvEafWVK6nw3f6KG1ir6r7xv3GwwgEYmeIS6UZgIUw8qU6OjroCv9midNJra0yTMrhBKKvHZz47ftzTVymfwl44HBIuWdUsOwss9LvnM2xajJXftmg5LPi2Ljcgn4xhFCnE-GYoY1tldnGfjfJpu8iK9o8ae91HHF-_jb4v5V7r5Fhbvf_UR92aH-jsoWYI3lqiPRuzYvRDoHHsKIPuHRrRmAM71YOnluDoPIe5_0BGuCE5cjeCtQ_sy_2xNcOZWhVd5K3PQGLTdZsuV9flC6riGmta5jRxR4C45C_ZcmZ9kvUarTuy1NRpCmkjUFfshlZJQr94YrVGpE6FYgwxpe2uxtFLs0uGrE1TGhKgRDGVJd1CeKNHeIlJi-Vwpd6DwVuzRtNpTl2ulD1svwpdNh0OqCelPoRmcZx9bJdEr0CUBz7IRpjyLvMtHU6ps0YQLFITpcTZKstE0p7rSWyqkwzyZpMWY95SgpjI6UIsijYtRFhdpnrLjeDg5Ew64dpdNdqQKT4mmhWkVUzegaZu_Jj0YJwz7oEVAwYvqS2XBhcHzo0ddYsk2pLuKfSX1Tuota8CCUqikC7asyRG-ASGV9ECSpdZmT-9sjwyPDVqJmqJL74TL8Kxvi0Lf_wEYYmikQgQAAA\"\n}"
+						}
+					]
+				},
+				{
+					"name": "2 - Retrieve devices",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "04f0c935-1713-4f6f-85ae-b1074e247056",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"pm.test(\"X-Powered-By is not present\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.headers.reduce(function(acc, header) { return Object.keys(header)[0] === \"X-Powered-By\" ? true : acc }, false)).eq(false);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"GET\",\n    \"url\": \"{{smart-hub-base-url}}/devices\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"X-Powered-By\": \"SmartHub Server Supreme\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/response",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"response"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "2 - Retrieve devices",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"GET\",\n    \"url\": \"https://smart-hub.example.com/devices\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        },\n        {\n            \"X-Powered-By\": \"SmartHub Server Supreme\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{pdg-base-url}}/sideband/response",
+									"host": [
+										"{{pdg-base-url}}"
+									],
+									"path": [
+										"sideband",
+										"response"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Wed, 02 Dec 2020 23:25:09 GMT"
+								},
+								{
+									"key": "Correlation-Id",
+									"value": "dbe503c4-b1c4-4650-a542-c9df234890bd"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "234"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"response_code\": \"200\",\n    \"response_status\": \"OK\",\n    \"url\": \"https://smart-hub.example.com/devices\",\n    \"method\": \"GET\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "3 - Retrieve devices by name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9c7e2a1-e8fe-4ebd-97dd-01fe1fa108ec",
+								"exec": [
+									"pm.test(\"Backend URL contains transformed query string\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.url.indexOf(\"compare=co\") !== -1).eq(true);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"GET\",\n    \"url\": \"{{test-harness-base-url}}/devices?name=sedan&operator=contains\",\n    \"http_version\": \"1.1\",\n    \"access_token\": {\n        \"active\": true,\n        \"sub\": \"{{known-user-id}}\"\n    },\n    \"headers\": [\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/request",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4 - Retrieve a person",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "8e0997b6-e311-4d37-ae5d-6e78ff7cb4c3",
+								"exec": [
+									"// Use the variable set in the pre-request script to determine if the tests should be skipped.",
+									"const shouldSkip = pm.variables.get('shouldSkip');",
+									"",
+									"(shouldSkip ? pm.test.skip : pm.test)(\"Status code is 403\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.response_code).to.eql('403');",
+									"});",
+									"(shouldSkip ? pm.test.skip : pm.test)(\"Message contains 'banned'\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(JSON.parse(jsonData.body).message).to.contain('banned');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
 						},
 						{
-							"key": "Content-Length",
-							"value": "234"
+							"listen": "prerequest",
+							"script": {
+								"id": "35bd5ec7-4d50-4131-b216-990a2bab604b",
+								"exec": [
+									"const { Property } = require('postman-collection');",
+									"",
+									"// The request context method dictates how the request context is populated by the sideband adapter.",
+									"// It drives the structure and content of the request body sent to `/sideband/response`.",
+									"const requestContextMethod = pm.variables.get('request-context-method');",
+									"",
+									"// When the requestContextMethod is \"none\", we need to skip the tests",
+									"const shouldSkip = requestContextMethod === 'none';",
+									"if (shouldSkip) {",
+									"    pm.variables.set('shouldSkip', shouldSkip);",
+									"} else {",
+									"",
+									"    // Start with the request body common to both request-context-methods, then add either the \"state\" or \"request\" property depending on",
+									"    // the value of ",
+									"    const requestBody = {",
+									"        response_code: \"200\",",
+									"        response_status: \"OK\",",
+									"        method: \"GET\",",
+									"        url: \"{{smart-hub-base-url}}/persons/{{known-person-id}}\",",
+									"        http_version: \"1.1\",",
+									"        headers: [",
+									"            {",
+									"                \"X-Banned-Users\": \"{{banned-username}}\"",
+									"            },",
+									"            {",
+									"                \"X-Powered-By\": \"SmartHub Server Supreme\"",
+									"            }",
+									"        ],",
+									"        body: \"{\\\"id\\\":\\\"{{known-person-id}}\\\",\\\"name\\\":\\\"Bruce Heller\\\",\\\"username\\\":\\\"Lyla69\\\",\\\"email\\\":\\\"Geovanni_Mueller66@gmail.com\\\",\\\"phone\\\":\\\"475.765.5023 x4199\\\",\\\"website\\\":\\\"breana.info\\\",\\\"address\\\":{\\\"street\\\":\\\"Joel Via\\\",\\\"suite\\\":\\\"Suite 111\\\",\\\"city\\\":\\\"Judyville\\\",\\\"zipcode\\\":\\\"43591\\\",\\\"geo\\\":{\\\"lat\\\":\\\"-37.6256\\\",\\\"lng\\\":\\\"169.6589\\\"}},\\\"company\\\":{\\\"name\\\":\\\"Hilpert Group\\\",\\\"catchPhrase\\\":\\\"Configurable composite portal\\\",\\\"bs\\\":\\\"transform rich mindshare\\\"}}\"",
+									"    };",
+									"    switch (requestContextMethod) {",
+									"        case 'state':",
+									"            Object.assign(requestBody, {",
+									"                state: 'H4sIAAAAAAAAAK1TTY-bMBD9K5YvvWAWAllITs1WUVupq62a7YfUVNEAU3BjMLXN7mYj_nvHJNtec6i4wJuZ5zeP5yM3-HtA6_jyyK0eTIk72fMlj2dZGNET8-AF77WhtjzKo4C36BpdUd_b9T11DEbRe-Ncv7y6UroE1Wjrltdpmlw1ukVLPb66e0Bjpe78ARN1g1ARxJffj3w1EKeRz-BOHTcIBg07bjmUTj7gli-dGTDYcjsU9LHlWTT_WUVYiCSPSpFGUSZgVoFYRBFCXs3zRZ5t-cjH4Mi_iVXfi_de82a1maDNO_F5s_5EyCVEfPwxBtzpPXZfQMkKnDY0eqvLPVuVJVrL7n2R_asGpNwXJtw7fPrcTSQ0-x9W80d4c87e8MGieeGf3PJmXbrheb2dfuzQ73aZLeepu9PQkXfQkpzLhgPK3yl23p7z5O3B6I59xYJEULZoo3NBJYnbNfBExgccW5A-dWt1sBjegtnb17XHwlK3VIeqIm6KFgXbGUTKLl87J5HdGz9JuR6k80pXvQsZhYWgUroDITcG9oN15ANhz7IvdTWtlM7jWCwWSUZwjdpzK_DEYj4PZ4vU46qrCVikYRxlMR8pM32jOz8eiyTLxXUSiyid-dMesbAnCb-gBRUW8plQkt9DRzL-GvJBOqcwYHev3uiOfg2DrmI3aGr07eDK5mNjwE67tKikNuCwYrXSBShmD9Zhy7CrJckIeEGe8AZM5yNbGFnurSBCUSr_yk5XWytdS7q3JF_6O3NZFMbxD9iHp7BRBAAA'",
+									"                });",
+									"            break;",
+									"        case 'request':",
+									"            Object.assign(requestBody, {",
+									"                request: {",
+									"                    source_ip: `${Property.replaceSubstitutions(\"{{$randomIP}}\")}`,",
+									"                    source_port: pm.variables.get('_valid-port'),",
+									"                    method: \"GET\",",
+									"                    url: \"{{test-harness-base-url}}/persons/{{known-person-id}}\",",
+									"                    http_version: \"1.1\",",
+									"                    access_token: {",
+									"                        active: true,",
+									"                        sub: \"{{banned-user-id}}\"",
+									"                    },",
+									"                    headers: [",
+									"                        {",
+									"                            \"X-App-Id\": \"{{known-app-id}}\"",
+									"                        }",
+									"                    ]",
+									"                }",
+									"            });",
+									"            break;",
+									"    };",
+									"    pm.variables.set(\"requestBody\", JSON.stringify(requestBody));",
+									"}"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
-					"cookie": [],
-					"body": "{\n    \"response_code\": \"200\",\n    \"response_status\": \"OK\",\n    \"url\": \"https://smart-hub.example.com/devices\",\n    \"method\": \"GET\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {\\\"active\\\":true,\\\"sub\\\":\\\"7d9fc465-ec1a-460c-ab38-435471f4918b\\\"}\"\n        }\n    ]\n}"
-				}
-			]
-		},
-		{
-			"name": "3 - Retrieve devices by name",
-			"event": [
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{requestBody}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/response",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"response"
+							]
+						}
+					},
+					"response": []
+				},
 				{
-					"listen": "test",
-					"script": {
-						"id": "55c73af7-f25c-4c77-966a-02c91daa15dc",
-						"exec": [
-							"pm.test(\"Backend URL contains transformed query string\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.url.indexOf(\"compare=co\") !== -1).eq(true);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
+					"name": "5 - Add a device to a home",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3c6b917d-f966-44b8-bad6-ec918119b146",
+								"exec": [
+									"pm.test(\"Should not forward audit property\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.body).to.not.contain(\"audit\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"PUT\",\n    \"url\": \"{{test-harness-base-url}}/homes/{{known-home-id}}/devices\",\n    \"http_version\": \"1.1\",\n    \"access_token\": {\n        \"active\": true,\n        \"sub\": \"{{known-user-id}}\"\n    },\n    \"headers\": [\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ],\n    \"body\": \"{\\\"id\\\":\\\"{{known-device-id}}\\\",\\\"audit\\\": \\\"{{$guid}}\\\"}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/request",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 - Change a control state",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b3148f84-9a72-41c5-8c9b-1e4a9805e5d5",
+								"exec": [
+									"pm.test(\"Status code is 402\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.response_code).eq(\"402\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"PATCH\",\n    \"url\": \"{{smart-hub-base-url}}/controls/{{known-control-id}}\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ],\n    \"body\": \"{\\\"name\\\": \\\"power\\\", \\\"value\\\":\\\"80000\\\",\\\"status\\\":\\\"on\\\", \\\"callsRemaining\\\": 0, \\\"readOnly\\\": false}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{pdg-base-url}}/sideband/response",
+							"host": [
+								"{{pdg-base-url}}"
+							],
+							"path": [
+								"sideband",
+								"response"
+							]
+						}
+					},
+					"response": []
 				}
 			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"GET\",\n    \"url\": \"{{test-harness-base-url}}/devices?name=sedan&operator=contains\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {{known-bearer-token}}\"\n        },\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{pdg-base-url}}/sideband/request",
-					"host": [
-						"{{pdg-base-url}}"
-					],
-					"path": [
-						"sideband",
-						"request"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "4 - Retrieve a person",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "b8bd506f-539c-4c8b-b8ec-893910ffb476",
-						"exec": [
-							"// Use the variable set in the pre-request script to determine if the tests should be skipped.",
-							"const shouldSkip = pm.variables.get('shouldSkip');",
-							"",
-							"(shouldSkip ? pm.test.skip : pm.test)(\"Status code is 403\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.response_code).to.eql('403');",
-							"});",
-							"(shouldSkip ? pm.test.skip : pm.test)(\"Message contains 'banned'\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(JSON.parse(jsonData.body).message).to.contain('banned');",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "fe40630a-c528-4c64-907d-81ce9cc1db33",
-						"exec": [
-							"const { Property } = require('postman-collection');",
-							"",
-							"// The request context method dictates how the request context is populated by the sideband adapter.",
-							"// It drives the structure and content of the request body sent to `/sideband/response`.",
-							"const requestContextMethod = pm.variables.get('request-context-method');",
-							"",
-							"// When the requestContextMethod is \"none\", we need to skip the tests",
-							"const shouldSkip = requestContextMethod === 'none';",
-							"if (shouldSkip) {",
-							"    pm.variables.set('shouldSkip', shouldSkip);",
-							"} else {",
-							"",
-							"    // Start with the request body common to both request-context-methods, then add either the \"state\" or \"request\" property depending on",
-							"    // the value of ",
-							"    const requestBody = {",
-							"        response_code: \"200\",",
-							"        response_status: \"OK\",",
-							"        method: \"GET\",",
-							"        url: \"{{smart-hub-base-url}}/persons/{{known-person-id}}\",",
-							"        http_version: \"1.1\",",
-							"        headers: [",
-							"            {",
-							"                \"X-Banned-Users\": \"{{banned-username}}\"",
-							"            },",
-							"            {",
-							"                \"X-Powered-By\": \"SmartHub Server Supreme\"",
-							"            }",
-							"        ],",
-							"        body: \"{\\\"id\\\":\\\"{{known-person-id}}\\\",\\\"name\\\":\\\"Bruce Heller\\\",\\\"username\\\":\\\"Lyla69\\\",\\\"email\\\":\\\"Geovanni_Mueller66@gmail.com\\\",\\\"phone\\\":\\\"475.765.5023 x4199\\\",\\\"website\\\":\\\"breana.info\\\",\\\"address\\\":{\\\"street\\\":\\\"Joel Via\\\",\\\"suite\\\":\\\"Suite 111\\\",\\\"city\\\":\\\"Judyville\\\",\\\"zipcode\\\":\\\"43591\\\",\\\"geo\\\":{\\\"lat\\\":\\\"-37.6256\\\",\\\"lng\\\":\\\"169.6589\\\"}},\\\"company\\\":{\\\"name\\\":\\\"Hilpert Group\\\",\\\"catchPhrase\\\":\\\"Configurable composite portal\\\",\\\"bs\\\":\\\"transform rich mindshare\\\"}}\"",
-							"    };",
-							"    switch (requestContextMethod) {",
-							"        case 'state':",
-							"            Object.assign(requestBody, {",
-							"                state: 'H4sIAAAAAAAAAK1TTY-bMBD9K5YvvWAWAllITs1WUVupq62a7YfUVNEAU3BjMLXN7mYj_nvHJNtec6i4wJuZ5zeP5yM3-HtA6_jyyK0eTIk72fMlj2dZGNET8-AF77WhtjzKo4C36BpdUd_b9T11DEbRe-Ncv7y6UroE1Wjrltdpmlw1ukVLPb66e0Bjpe78ARN1g1ARxJffj3w1EKeRz-BOHTcIBg07bjmUTj7gli-dGTDYcjsU9LHlWTT_WUVYiCSPSpFGUSZgVoFYRBFCXs3zRZ5t-cjH4Mi_iVXfi_de82a1maDNO_F5s_5EyCVEfPwxBtzpPXZfQMkKnDY0eqvLPVuVJVrL7n2R_asGpNwXJtw7fPrcTSQ0-x9W80d4c87e8MGieeGf3PJmXbrheb2dfuzQ73aZLeepu9PQkXfQkpzLhgPK3yl23p7z5O3B6I59xYJEULZoo3NBJYnbNfBExgccW5A-dWt1sBjegtnb17XHwlK3VIeqIm6KFgXbGUTKLl87J5HdGz9JuR6k80pXvQsZhYWgUroDITcG9oN15ANhz7IvdTWtlM7jWCwWSUZwjdpzK_DEYj4PZ4vU46qrCVikYRxlMR8pM32jOz8eiyTLxXUSiyid-dMesbAnCb-gBRUW8plQkt9DRzL-GvJBOqcwYHev3uiOfg2DrmI3aGr07eDK5mNjwE67tKikNuCwYrXSBShmD9Zhy7CrJckIeEGe8AZM5yNbGFnurSBCUSr_yk5XWytdS7q3JF_6O3NZFMbxD9iHp7BRBAAA'",
-							"                });",
-							"            break;",
-							"        case 'request':",
-							"            Object.assign(requestBody, {",
-							"                request: {",
-							"                    source_ip: `${Property.replaceSubstitutions(\"{{$randomIP}}\")}`,",
-							"                    source_port: pm.variables.get('_valid-port'),",
-							"                    method: \"GET\",",
-							"                    url: \"{{test-harness-base-url}}/persons/{{known-person-id}}\",",
-							"                    http_version: \"1.1\",",
-							"                    headers: [",
-							"                        {",
-							"                            \"Authorization\": \"Bearer {{banned-bearer-token}}\"",
-							"                        },",
-							"                        {",
-							"                            \"X-App-Id\": \"{{known-app-id}}\"",
-							"                        }",
-							"                    ]",
-							"                }",
-							"            });",
-							"            break;",
-							"    };",
-							"    pm.variables.set(\"requestBody\", JSON.stringify(requestBody));",
-							"}"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{{requestBody}}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{pdg-base-url}}/sideband/response",
-					"host": [
-						"{{pdg-base-url}}"
-					],
-					"path": [
-						"sideband",
-						"response"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "5 - Add a device to a home",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "84c29b2f-1731-46b9-acf8-2f83c7f3313e",
-						"exec": [
-							"pm.test(\"Should not forward audit property\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.body).to.not.contain(\"audit\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"source_ip\": \"{{$randomIP}}\",\n    \"source_port\": {{_valid-port}},\n    \"method\": \"PUT\",\n    \"url\": \"{{test-harness-base-url}}/homes/{{known-home-id}}/devices\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {{known-bearer-token}}\"\n        },\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ],\n    \"body\": \"{\\\"id\\\":\\\"{{known-device-id}}\\\",\\\"audit\\\": \\\"{{$guid}}\\\"}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{pdg-base-url}}/sideband/request",
-					"host": [
-						"{{pdg-base-url}}"
-					],
-					"path": [
-						"sideband",
-						"request"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "6 - Change a control state",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "7c5db144-bf04-436f-947c-e6c5c772a7c3",
-						"exec": [
-							"pm.test(\"Status code is 402\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    pm.expect(jsonData.response_code).eq(\"402\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"response_code\": 200,\n    \"response_status\": \"OK\",\n    \"method\": \"PATCH\",\n    \"url\": \"{{smart-hub-base-url}}/controls/{{known-control-id}}\",\n    \"http_version\": \"1.1\",\n    \"headers\": [\n        {\n            \"Authorization\": \"Bearer {{known-bearer-token}}\"\n        },\n        {\n            \"X-App-Id\": \"{{known-app-id}}\"\n        }\n    ],\n    \"body\": \"{\\\"name\\\": \\\"power\\\", \\\"value\\\":\\\"80000\\\",\\\"status\\\":\\\"on\\\", \\\"callsRemaining\\\": 0, \\\"readOnly\\\": false}\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{pdg-base-url}}/sideband/response",
-					"host": [
-						"{{pdg-base-url}}"
-					],
-					"path": [
-						"sideband",
-						"response"
-					]
-				}
-			},
-			"response": []
+			"protocolProfileBehavior": {}
 		}
 	],
-	"auth": {
-		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "{{known-bearer-token}}",
-				"type": "string"
-			}
-		]
-	},
 	"event": [
 		{
 			"listen": "prerequest",
@@ -485,11 +936,12 @@
 					"}",
 					"console.info('Response Headers:');",
 					"pm.response.headers.each(header => console.info(`  ${header.key}: ${header.value}`));",
-					"if (pm.response.body) {",
+					"const rawResponseBody = pm.response.text();",
+					"if (rawResponseBody) {",
 					"    console.info(`Response Body:`);",
 					"",
 					"    // Remove unnecessary whitespace",
-					"    console.info(`  ${JSON.stringify(JSON.parse(pm.response.body.raw))}`);",
+					"    console.info(`  ${JSON.stringify(JSON.parse(rawResponseBody))}`);",
 					"}",
 					"pm.test(\"Response is valid JSON\", function () {",
 					"    var jsonData = pm.response.json();",
@@ -501,87 +953,87 @@
 	],
 	"variable": [
 		{
-			"id": "7bbfc43a-24f6-4dd0-a5aa-481910e17cad",
+			"id": "62c92a26-9e2f-4327-8fc4-cd8e7b66d468",
 			"key": "banned-app-id",
 			"value": "BAN"
 		},
 		{
-			"id": "8b6255b8-bd85-4561-81f3-5c0977e473f5",
+			"id": "bd4042f9-57a3-4aa0-9c1a-03a5be409326",
 			"key": "banned-bearer-token",
 			"value": "{\\\"active\\\":true,\\\"sub\\\":\\\"{{banned-user-id}}\\\"}"
 		},
 		{
-			"id": "e279b8a9-f204-47e5-8fb4-99c0af6cc089",
+			"id": "a2f0122a-c7d1-418c-8a79-0b1718e54694",
 			"key": "banned-user-id",
 			"value": "705fd0eb-380c-4007-a2da-900ea8d58987"
 		},
 		{
-			"id": "41706aa1-37a6-48bc-a18b-417dd64bebf1",
+			"id": "0bbf6914-cc55-43c0-886b-bc6f66cfd507",
 			"key": "banned-username",
 			"value": "l33t_haxor"
 		},
 		{
-			"id": "4cf94684-ebb9-46b2-867c-5928640ab1da",
+			"id": "ebc97b81-ac40-4bd3-8b3d-c706e989b387",
 			"key": "dg-host",
 			"value": "localhost"
 		},
 		{
-			"id": "96704795-bb4e-460e-baa0-c52454342fba",
+			"id": "e8e021af-e4d5-48f9-87aa-2dd6e9e0c2b2",
 			"key": "dg-port",
 			"value": "7443"
 		},
 		{
-			"id": "a65a035f-b370-44fe-bce3-9df8ffb498ea",
+			"id": "7f16301c-7fa2-45a2-997c-9b8b19156744",
 			"key": "dg-sideband-secret",
 			"value": "5e96eaf6-251e-4555-9434-d1b224f05e99"
 		},
 		{
-			"id": "33aae4ec-b839-4a85-9b99-3211161c2493",
+			"id": "420c4429-a1ef-4be0-8279-d90b1d95155a",
 			"key": "known-app-id",
 			"value": "PNG"
 		},
 		{
-			"id": "53133613-655e-4631-a1f3-dff1405b7bc7",
+			"id": "683deb70-9e95-4090-8b54-da7540510e9e",
 			"key": "known-bearer-token",
 			"value": "{\\\"active\\\":true,\\\"sub\\\":\\\"{{known-user-id}}\\\"}"
 		},
 		{
-			"id": "6289f6e3-9a7c-479f-8305-bda88359fc62",
+			"id": "fe7d2dbe-d0b9-4cfb-8909-911fbade9e4c",
 			"key": "known-control-id",
 			"value": "1da1a20f-6707-40b3-a2af-a6bc9054b640"
 		},
 		{
-			"id": "00ac05dc-8a62-4c62-81ce-d4cddb1aed64",
+			"id": "45c1085c-4975-4acb-928a-b375f474cf02",
 			"key": "known-device-id",
 			"value": "83f6e6ae-96fe-4ba9-9480-88a3a33a7add"
 		},
 		{
-			"id": "6c308b89-4337-4574-b26e-3b129b5873fa",
+			"id": "550ec15e-3786-43c5-b96e-4e930c778620",
 			"key": "known-home-id",
 			"value": "5b99ccf0-a164-4472-baae-6243768f0a5b"
 		},
 		{
-			"id": "73f296de-3734-4c1e-8def-a8f311dcba51",
+			"id": "a05e4e69-085f-44f7-92da-874d12a8ad9f",
 			"key": "known-person-id",
 			"value": "7d9fc465-ec1a-460c-ab38-435471f4918b"
 		},
 		{
-			"id": "6eff6a21-5601-4ddc-833d-8df02131e683",
+			"id": "8bdeb0c3-a6ba-4627-b20d-5e0020e07053",
 			"key": "known-user-id",
 			"value": "7d9fc465-ec1a-460c-ab38-435471f4918b"
 		},
 		{
-			"id": "bc248d37-be14-4e60-8e17-9c3e9c7031e3",
+			"id": "8b45e7f5-f3f1-4249-bb80-ec8e2109b071",
 			"key": "request-context-method",
 			"value": "state"
 		},
 		{
-			"id": "2771f6c4-9b95-4ae2-baa8-3f49fdf8d992",
+			"id": "247b4b4c-4bdd-4d98-870e-3dbf398babf6",
 			"key": "smart-hub-base-url",
 			"value": "https://smart-hub.example.com"
 		},
 		{
-			"id": "22169a59-a196-4477-89ad-01200f30242a",
+			"id": "483bb5f9-427a-448b-a6e0-16a6a432b4ac",
 			"key": "test-harness-base-url",
 			"value": "https://api.example.com"
 		}
