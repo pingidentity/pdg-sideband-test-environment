@@ -44,9 +44,9 @@ docker-compose -f .support/docker-compose.yml up
 When the containers show a healthy state, you can examine the PingDataGovernance configuration by logging into the    
 PingData Console [https://localhost:5443/console/](https://localhost:5443/console/) with the following information:    
     
-   | PingDataConsole `Server` | Username      | Password      |    
-   | ------------------------ | ------------- | ------------- |    
-   | pingdatagovernance       | administrator | 2FederateM0re |
+   | PingDataConsole `Server`     | Username      | Password      |    
+   | ---------------------------- | ------------- | ------------- |    
+   | pingdatagovernance:636       | administrator | 2FederateM0re |
 
 You will want to update the pingdatagovernance container to use external PDP mode. This can either be done using the 
 PingData Console, or using the following Docker command:
