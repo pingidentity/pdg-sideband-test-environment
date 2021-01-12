@@ -12,7 +12,6 @@ services:
       - SERVER_PROFILE_PATH=server-profiles/pingdatagovernance
       - SERVER_PROFILE_BRANCH=${PDG_SIDEBAND_PROFILE_BRANCH:-main}
       - PDG_SIDEBAND_REQUEST_CONTEXT_METHOD=${PDG_SIDEBAND_REQUEST_CONTEXT_METHOD:-state}
-      - PDG_SIDEBAND_PAP_PORT=${PDG_SIDEBAND_PAP_PORT:-8443}
     env_file:
       - ${HOME}/.pingidentity/devops
     ports:

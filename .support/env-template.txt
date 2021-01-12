@@ -4,6 +4,10 @@ PDG_SIDEBAND_SMART_HUB_PORT=6443
 PDG_SIDEBAND_DG_PORT=7443
 PDG_SIDEBAND_PAP_PORT=8443
 
+# If accessing the Policy Administration GUI using a hostname other than "localhost" modify the environment variable
+# below to pass browser CORS checks.
+PDG_SIDEBAND_PAP_HOSTNAME=localhost
+
 # To view example Sideband API request/responses, set the below value to the PingDataGovernance Sideband API host
 # before running ./run-test-harness sideband-api-request-examples where the host is reachable.
 PDG_SIDEBAND_DG_HOST=localhost
